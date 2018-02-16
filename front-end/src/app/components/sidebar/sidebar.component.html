@@ -1,0 +1,59 @@
+<div class="sidebar">
+  <!--<div class="sidebar-block">-->
+    <!--<h3 class="sidebar-block__header">MAIN DATA</h3>-->
+    <!--<div class="sidebar-menu">-->
+      <!--<div class="sidebar-menu-item">-->
+        <!--<img src="" alt="">-->
+        <!--<a href="#">Home</a>-->
+      <!--</div>-->
+      <!--<div class="sidebar-menu-item">-->
+        <!--<img src="" alt="">-->
+        <!--<a href="#">Users</a>-->
+      <!--</div>-->
+      <!--<div class="sidebar-menu-item">-->
+        <!--<img src="" alt="">-->
+        <!--<a href="#">Orders</a>-->
+      <!--</div>-->
+      <!--<div class="sidebar-menu-item">-->
+        <!--<img src="" alt="">-->
+        <!--<a href="#">Managers</a>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <!--<div class="sidebar-block">-->
+    <!--<h3 class="sidebar-block__header">CONSTRUCTOR</h3>-->
+    <!--<div class="sidebar-menu">-->
+      <!--<div class="sidebar-menu-item">-->
+        <!--<img src="" alt="">-->
+        <!--<a href="#">Categories</a>-->
+      <!--</div>-->
+      <!--<div class="sidebar-menu-item">-->
+        <!--<img src="" alt="">-->
+        <!--<a href="#">Dishes</a>-->
+      <!--</div>-->
+      <!--<div class="sidebar-menu-item">-->
+        <!--<img src="" alt="">-->
+        <!--<a href="#">Ingredients</a>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <!--<div class="sidebar-block sidebar-block&#45;&#45;individual">-->
+    <!--<img src="" alt="">-->
+    <!--<a href="#">SETTINGS</a>-->
+  <!--</div>-->
+
+  <div class="sidebar-block" *ngFor="let nav of data">
+    <div class="sidebar-block__item"  *ngIf="nav.hasOwnProperty('children')">
+        <h3>{{nav.name}}</h3>
+        <ul *ngFor="let navItem of nav.children">
+          <li>
+            <img src={{navItem.icon}}>
+            <a href="#">{{navItem.name}}</a>
+          </li>
+        </ul>
+    </div>
+  </div>
+
+</div>

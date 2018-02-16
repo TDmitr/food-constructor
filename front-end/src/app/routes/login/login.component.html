@@ -1,0 +1,30 @@
+<div class="login">
+
+  <div class="headers">
+    <h2 [class.active]='logIn' (click)="loginForm()">Login</h2>
+    <h2 [class.active]='signUp' (click)="signupForm()">Sign Up</h2>
+  </div>
+
+  <form *ngIf="logIn" class="login-form" id="login-form" novalidate>
+    <div class="form-group">
+      <input type="text" placeholder="username" name="u">
+    </div>
+    <div class="form-group">
+      <input type="text" placeholder="password" name="p">
+    </div>
+    <button class="submit" type="submit">Log In</button>
+  </form>
+
+  <form *ngIf="signUp" class="signup-form" id="signup-form" novalidate>
+    <div class="form-group">
+      <input type="text" placeholder="email" name="signup-email">
+    </div>
+    <div class="form-group">
+      <input type="text" placeholder="password" name="signup-password">
+    </div>
+    <div class="form-group">
+      <input type="text" placeholder="confirm password" name="signup-confirm-password">
+    </div>
+    <button class="submit" type="submit">Sign Up</button>
+  </form>
+</div>

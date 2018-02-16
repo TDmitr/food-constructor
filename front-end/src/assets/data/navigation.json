@@ -1,0 +1,12 @@
+[
+  {
+    "name": "MAIN",
+    "icon": null,
+    "children": [
+      {"name": "Home", "icon": "./assets/img/svg-sprites.svg#home"},
+      {"name": "Users", "icon": null},
+      {"name": "Managers", "icon": null},
+      {"name": "Orders", "icon": null}
+    ]
+  }
+]
