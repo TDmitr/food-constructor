@@ -1,0 +1,50 @@
+@import "../../styles/sass/variables"
+@import "../../styles/sass/mixin"
+
+.data-table
+  width: 90%
+  margin: auto
+  font-size: 13px
+  border-radius: 5px
+  box-shadow: 0 0 10px 0 rgba(0,0,0, .1)
+
+  table
+    width: 100%
+    border: none
+    border-collapse: collapse
+    border-radius: 5px
+
+  tr
+    height: 15px
+    transition: background $transition
+    &:nth-child(odd)
+      background: white
+    &:nth-child(even)
+      background: transparent
+    &:first-child
+      border-radius: 5px 5px 0 0
+    &:last-child
+      border-radius: 0 0 5px 5px
+    &:not(:first-child):hover
+      background: darken($light-blue, 5%)
+
+    td, th
+      padding: 10px 15px
+      text-align: left
+      background: transparent
+      &:first-child
+        padding-left: 25px
+
+    th
+      transition: background $transition, color $transition
+      cursor: pointer
+      user-select: none
+      &:hover
+        background: $blue-high-dark
+        color: white
+
+    img
+      width: 40px
+      height: 40px
+      object-fit: cover
+      border-radius: 50%

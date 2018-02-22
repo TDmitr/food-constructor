@@ -1,0 +1,15 @@
+<div class="c-search">
+  <div class="c-search__group">
+    <input type="text" class="c-search__input c-search__input--text" (keyup)="setValue($event)">
+  </div>
+  <div class="c-search__group">
+    <button class="c-search__input c-search__input--dropdown js-hook-dropdown">
+      {{searchAttribute}}
+      <ul class="c-search__dropdown">
+        <li *ngFor="let item of searchAttributes" [class.active]="item.toLowerCase() === searchAttribute" (click)='setSearchAttribute(item)'>{{item}}</li>
+      </ul>
+    </button>
+  </div>
+
+</div>
+

@@ -12,6 +12,9 @@ import { DataTableComponent } from './components/data-table/data-table.component
 import { IndexComponent } from './dashboard/index/index.component';
 import { UsersComponent } from './dashboard/users/users.component';
 import {NgDataJsonserviceService} from "./services/ng-data-jsonservice.service";
+import {KeysPipe} from "./pipes/json-to-array";
+import { SearchComponent } from './components/search/search.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -19,7 +22,7 @@ const appRoutes: Routes = [
     path: '',
     component: MainComponent,
     children: [
-      {path: '', component: IndexComponent},
+      {path: 'index', component: IndexComponent},
       {path: 'users', component: UsersComponent},
     ]
   }
@@ -35,7 +38,10 @@ const appRoutes: Routes = [
     HeaderComponent,
     DataTableComponent,
     IndexComponent,
-    UsersComponent
+    UsersComponent,
+    KeysPipe,
+    SearchComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

@@ -45,15 +45,15 @@
   <!--</div>-->
 
   <div class="sidebar-block" *ngFor="let nav of data">
-    <div class="sidebar-block__item"  *ngIf="nav.hasOwnProperty('children')">
+      <div class="sidebar-block__item"  *ngIf="nav.hasOwnProperty('children')">
         <h3>{{nav.name}}</h3>
-        <ul *ngFor="let navItem of nav.children">
-          <li>
-            <img src={{navItem.icon}}>
-            <a href="#">{{navItem.name}}</a>
-          </li>
-        </ul>
-    </div>
+        <a routerLink={{navItem.path}} routerLinkActive="active" *ngFor="let navItem of nav.children">
+          <svg>
+            <use [attr.xlink:href]="'./assets/img/svg-sprites.svg#'+navItem.icon"></use>
+          </svg>
+          <span>{{navItem.name}}</span>
+        </a>
+      </div>
   </div>
 
 </div>

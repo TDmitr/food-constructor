@@ -1,3 +1,19 @@
-<p>
-  data-table works!
-</p>
+<div class="data-table">
+  <table>
+    <tr>
+      <th (click)="sortByValue('id', $event)" data-order=0>ID</th>
+      <th *ngIf="image">PHOTO</th>
+      <th *ngFor="let column of columns" (click)="sortByValue(column, $event)" data-order=0>{{column}}</th>
+    </tr>
+
+    <tr *ngFor="let item of data">
+      <td>{{item.id}}</td>
+      <td *ngIf="image">
+        <img [src]="item.photo">
+      </td>
+      <td *ngFor="let key of item.data | keys">
+        {{item.data[key]}}
+      </td>
+    </tr>
+  </table>
+</div>
