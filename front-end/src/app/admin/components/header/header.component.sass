@@ -1,0 +1,32 @@
+@import "../../../styles/sass/variables"
+@import "../../../styles/sass/mixin"
+
+.header
+  width: 83%
+  position: fixed
+  height: 50px
+  border-bottom: 1px solid $header-border
+  background: $header-background
+  color: $header-color
+  left: 17%
+  top: 0
+
+  &-layout
+    float: right
+    height: 100%
+    text-align: left
+    margin-right: 15px
+
+    &__item
+      padding: 15px 10px
+      display: inline-block
+
+      svg
+        fill: $header-color
+        width: 17.5px
+        height: 17.5px
+        cursor: pointer
+        transition: fill $transition
+
+        &:hover
+          fill: $header-color-hover

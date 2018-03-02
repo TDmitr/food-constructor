@@ -1,0 +1,94 @@
+@import "../../../styles/sass/variables"
+@import "../../../styles/sass/mixin"
+
+.c-search
+  width: 40%
+  margin: 20px 5%
+  display: inline-block
+  position: relative
+  &__group
+    position: relative
+    display: inline-block
+    vertical-align: top
+    &:first-child
+      float: left
+      width: 70%
+    &:last-child
+      margin-left: -1px
+      width: 30%
+  &__dropdown
+    position: absolute
+    display: block
+    background: $input-bg
+    left: -1px
+    margin: 6px 0 0 0
+    max-height: 0
+    padding: 0
+    width: calc(100% + 2px)
+    list-style: none
+    overflow: hidden
+    transition: max-height $transition
+    border-radius: 0 0 5px 5px
+    border: 1px solid $blue-high-dark
+    border-top: none
+    opacity: 0
+
+    li
+      padding: 7px 15px
+      text-transform: uppercase
+      transition: background $transition, color $transition
+      cursor: pointer
+      font-size: 13px
+      color: $dark
+      &:hover, &.active
+        color: white
+        background: $blue-high-dark
+
+  &__input
+    width: 100%
+    background: $input-bg
+    color: $input-color
+    border: 1px solid $input-border
+    height: 30px
+    transition: border-color $transition
+    padding: 0 15px
+    &--text
+      border-radius: 5px 0 0 5px
+      &:focus
+        border-color: $blue-high-dark
+    &--dropdown
+      border-radius: 0 5px 5px 0
+      z-index: 2
+      position: relative
+      background: $blue-high-dark
+      border-color: $blue-high-dark
+      cursor: pointer
+      color: white
+      font-size: 13px
+      font-weight: 600
+      text-align: left
+      padding-left: 15px
+      text-transform: uppercase
+      &:after
+        content: ''
+        display: block
+        height: 15px
+        width: 15px
+        background-image: url("../../../../assets/img/right-arrow.svg")
+        background-size: 12px 12px
+        background-repeat: no-repeat
+        background-position: center center
+        position: absolute
+        right: 15px
+        top: 6px
+        transition: transform $transition
+      &:focus
+        border-radius: 0 5px 0 0
+        &:after
+          transform: rotate(90deg)
+        & ul
+          max-height: 555px
+          padding: 10px 0
+          opacity: 1
+
+

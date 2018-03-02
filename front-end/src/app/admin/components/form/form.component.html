@@ -1,0 +1,30 @@
+<form novalidate class="form" #userForm="ngForm" (ngSubmit)="save(userForm.value)">
+  <div class="form__header">Create a new user</div>
+  <div class="form__body">
+    <div class="form__group">
+
+      <input type="text" name="name" ngModel required>
+      <label>Name</label>
+    </div>
+    <div class="form__group">
+
+      <input type="text" name="surname" ngModel required>
+      <label>Surname</label>
+    </div>
+    <div class="form__group">
+
+      <input type="email" name="email" ngModel required>
+      <label>Email</label>
+    </div>
+  </div>
+
+  <div class="form__controls">
+    <a [routerLink]="['../']">Cancel</a>
+    <button type="submit" [class.loading]="loading">
+      Submit
+      <svg id="load" x="0px" y="0px" viewBox="0 0 150 150">
+        <circle id="loading-inner" cx="75" cy="75" r="60"/>
+      </svg>
+    </button>
+  </div>
+</form>

@@ -4,3 +4,68 @@ body *
 
 input, button
   outline: none
+
+header
+  font-size: 34px
+  font-weight: 700
+  color: $dark
+  border-left: 20px solid $blue
+  margin: 20px 25px
+  padding: 5px 25px
+
+
+.dashboard
+  &__add
+    margin: 20px 25px
+    padding: 20px 105px
+    border-top: 1px solid rgba(0,0,0,0.1)
+    border-bottom: 1px solid rgba(0,0,0,0.1)
+    text-align: right
+    a
+      display: inline-block
+      color: $dark
+      cursor: pointer
+      background: #4CAF50
+      width: 35px
+      height: 35px
+      border-radius: 50%
+      position: relative
+      border: none
+      transition: background $transition
+      z-index: 1
+
+      svg
+        fill: white
+        width: 20px
+        height: 20px
+        top: 7.5px
+        left: 7.5px
+        position: absolute
+        transition: transform .5s
+
+      &:before
+        content: attr(data-attr)
+        font-size: 14px
+        font-weight: 600
+        position: absolute
+        right: 100%
+        top: 50%
+        width: 200px
+        max-width: 0
+        transform: translateY(-50%)
+        margin-right: 0
+        transition: margin .7s, max-width .7s
+        z-index: 0
+        overflow: hidden
+        white-space: nowrap
+        text-align: right
+
+      &:hover
+        background: darken(#4CAF50, 5%)
+        svg
+          transform: rotate(360deg)
+        &:before
+          max-width: 200px
+          margin-right: 10px
+
+
