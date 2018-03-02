@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Pizza",
+    "photo": null,
+    "total": 10
+  },
+  {
+    "name": "Burgers",
+    "photo": null,
+    "total": 10
+  },
+  {
+    "name": "Salads",
+    "photo": null,
+    "total": 5
+  },
+  {
+    "name": "Deserts",
+    "photo": null,
+    "total": 10
+  }
+]

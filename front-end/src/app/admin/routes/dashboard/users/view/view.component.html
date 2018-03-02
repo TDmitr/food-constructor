@@ -1,0 +1,31 @@
+<div class="view-popup">
+  <div class="view-popup__content">
+   <a [routerLink]="['../../']">
+     <svg>
+       <use xlink:href="./assets/img/svg-sprites.svg#add-icon"></use>
+     </svg>
+   </a>
+
+    <div class="view-popup__avatar">
+      <svg>
+        <use xlink:href="./assets/img/svg-sprites.svg#user-boy"></use>
+      </svg>
+    </div>
+    <div class="view-popup__name" *ngIf="!data">
+      Name Surname
+    </div>
+    <div class="view-popup__name" *ngIf="data">
+      {{data.name}} {{data.surname}}
+    </div>
+    <div class="view-popup__info" *ngIf="!data">
+      <div class="key">Email</div>
+      <div class="value">email@email.com</div>
+    </div>
+
+    <div class="view-popup__info" *ngIf="data">
+      <div class="key">Email</div>
+      <div class="value">{{data.email}}</div>
+    </div>
+
+  </div>
+</div>

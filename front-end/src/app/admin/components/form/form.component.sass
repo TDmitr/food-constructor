@@ -1,0 +1,139 @@
+@import "../../../styles/sass/variables"
+@import "../../../styles/sass/mixin"
+
+@keyframes loading
+  0%
+    transform: rotate(0)
+  100%
+    transform: rotate(360deg)
+
+@keyframes loading-circle
+  0%
+    stroke-dashoffset: 0
+  100%
+    stroke-dashoffset: -600
+
+
+.form
+  margin: 45px 20px
+  padding: 55px 40px
+  background: white
+  width: 80%
+  border-radius: 7px
+  box-shadow: 0 8px 18px rgba(0,0,0,0.1), 0 4px 4px rgba(0,0,0,0.01)
+
+  &__header
+    padding: 0 0 20px
+    margin: 0 0 20px
+    border-bottom: 1px solid rgba(0,0,0,.1)
+    font-size: 16px
+    font-weight: 700
+    text-transform: uppercase
+    letter-spacing: 1px
+    color: darken($dark-blue, 10%)
+
+  &__body
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    width: 100%
+
+  &__group
+    position: relative
+    padding: 10px 25px 0 0
+    display: flex
+    flex-direction: column-reverse
+    width: 50%
+
+    label
+      font-weight: 500
+      font-size: 14px
+      line-height: 2.5
+      transition: color $transition, font-weight $transition
+      color: rgba(0,0,0,0.7)
+
+    input
+      width: 100%
+      border-radius: 15px
+      border: 1px solid $input-border
+      color: $input-color
+      transition: border-color $transition
+      line-height: 30px
+      padding: 0 25px
+      font-size: 13px
+
+      &:focus
+        border-color: $input-focus
+
+        & + label
+          color: $blue-high-dark
+
+
+  &__controls
+    display: flex
+    justify-content: flex-end
+    padding: 25px 25px 0
+    align-items: center
+
+    button, a
+      cursor: pointer
+      height: 35px
+      line-height: 34px
+      border-radius: 20px
+      width: 135px
+      margin-left: 15px
+      font-size: 14px
+      font-weight: 100
+      border: none
+      position: relative
+      display: block
+      text-decoration: none
+
+
+      &:first-child
+        color: $dark
+        transition: font-weight $transition
+        &:hover
+          font-weight: 500
+      &:last-child
+        background: $blue-high-dark
+        color: white
+        transition: background $transition
+        &:hover
+          background: darken($blue-high-dark, 10%)
+          font-weight: 500
+
+      svg
+        display: none
+
+      &.loading
+        //height: 65px
+        //line-height: 64px
+        //width: 65px
+        color: transparent
+        overflow: hidden
+        //border-radius: 50%
+        background: darken($blue-high-dark, 10%)
+
+        svg
+          //width: 100%
+          //height: 100%
+          display: block
+
+        #load
+          position: absolute
+          top: 20%
+          left: 57px
+          height: 60%
+          animation: loading 3s linear infinite
+          #loading-inner
+            stroke:
+              dashoffset: 0
+              dasharray: 300
+              width: 15
+              miterlimit: 10
+              linecap: round
+
+            animation: loading-circle 1.5s linear infinite
+            stroke: white
+            fill: transparent

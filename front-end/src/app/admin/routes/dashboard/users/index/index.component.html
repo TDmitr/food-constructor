@@ -1,0 +1,21 @@
+<div class="dashboard__add">
+  <a data-attr="Add new user" [routerLink]="['add']">
+    <svg>
+      <use xlink:href="./assets/img/svg-sprites.svg#add-icon"></use>
+    </svg>
+  </a>
+</div>
+
+<!--<app-search-->
+<!--[attributes]='columns'-->
+<!--[data]="data"-->
+<!--[allData]="data"-->
+<!--(changeData)="changeData($event)">-->
+<!--</app-search>-->
+
+<app-data-table
+  [columns]='columns'
+  [data]="outputData">
+</app-data-table>
+
+<router-outlet></router-outlet>
