@@ -1,0 +1,16 @@
+<div class="dashboard__add dashboard__add--large">
+  <a data-attr="Add new category" [routerLink]="['add']">
+    <svg>
+      <use xlink:href="./assets/img/svg-sprites.svg#add-icon"></use>
+    </svg>
+  </a>
+</div>
+<div class="c-list" [@articleAnimation]="categories.length">
+  <article class="c-list__item" *ngFor="let item of categories">
+    <svg>
+      <use [attr.xlink:href]="'./assets/img/food-sprites.svg#'+item.photo"></use>
+    </svg>
+    <h3>{{item.name}}</h3>
+    <p>{{item.total}} dishes in category</p>
+  </article>
+</div>

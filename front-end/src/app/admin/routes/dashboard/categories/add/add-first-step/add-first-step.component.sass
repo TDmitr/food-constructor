@@ -1,0 +1,68 @@
+@import "../../../../../../styles/sass/variables"
+@import "../../../../../../styles/sass/mixin"
+
+.add-content
+
+  &__name
+    display: flex
+    flex-direction: column-reverse
+    input
+      display: block
+      width: 100%
+      border: none
+      border-bottom: 1px solid lightgrey
+      line-height: 35px
+      font-size: 22px
+      padding: 5px 25px
+    label
+      font-size: 22px
+      font-weight: 600
+
+  &__photo
+    width: 100%
+    margin: 15px auto
+    padding: 45px 25px
+    border: 2px dashed lightgrey
+    border-radius: 10px
+    text-align: center
+
+    svg
+      fill: $blue
+      opacity: .5
+      width: 150px
+      height: 100px
+
+    input[type='file']
+      opacity: 0
+      position: absolute
+      cursor: pointer
+
+      & + label
+        padding: 7px 25px
+        background: #DC6180
+        color: white
+        display: inline-block
+        cursor: pointer
+        width: auto
+        transition: background $transition
+        &:hover
+          background: darken(#DC6180, 10%)
+
+
+    p:first-of-type
+      font-size: 20px
+      font-weight: 600
+      color: $dark
+    p:last-of-type
+      font-size: 15px
+      font-weight: 100
+      color: $dark
+
+
+  &__description
+    textarea
+      width: 100%
+      border: 1px solid lightgrey
+      padding: 25px
+      font-size: 18px
+      height: 100px

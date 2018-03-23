@@ -1,22 +1,42 @@
 [
   {
     "name": "Pizza",
-    "photo": null,
+    "photo": "pizza",
     "total": 10
   },
   {
     "name": "Burgers",
-    "photo": null,
+    "photo": "burger",
     "total": 10
   },
   {
     "name": "Salads",
-    "photo": null,
+    "photo": "salad",
     "total": 5
   },
   {
     "name": "Deserts",
-    "photo": null,
+    "photo": "desert",
+    "total": 10
+  },
+  {
+    "name": "Pizza",
+    "photo": "pizza",
+    "total": 10
+  },
+  {
+    "name": "Burgers",
+    "photo": "burger",
+    "total": 10
+  },
+  {
+    "name": "Salads",
+    "photo": "salad",
+    "total": 5
+  },
+  {
+    "name": "Deserts",
+    "photo": "desert",
     "total": 10
   }
 ]

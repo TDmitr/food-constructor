@@ -1,0 +1,6 @@
+<div class="container">
+  <button (click)="openPopup()"> Add layer</button>
+</div>
+<app-add-third-step-popup
+  *ngIf="isPopup"
+  (closePopup)="closePopup($event)"></app-add-third-step-popup>

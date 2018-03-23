@@ -15,7 +15,7 @@ import { NgDataJsonserviceService } from './admin/services/ng-data-jsonservice.s
 import { KeysPipe } from './pipes/json-to-array';
 import { SearchComponent } from './admin/components/search/search.component';
 import { PaginationComponent } from './admin/components/pagination/pagination.component';
-import { CategoriesComponent } from './admin/routes/dashboard/categories/categories.component';
+
 import { EditComponent } from './admin/routes/dashboard/users/edit/edit.component';
 import { AddUserComponent } from './admin/routes/dashboard/users/add/add.component';
 import { UsersIndexComponent } from './admin/routes/dashboard/users/index/index.component';
@@ -24,6 +24,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserServiceService } from './admin/services/user/user-service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ViewComponent } from './admin/routes/dashboard/users/view/view.component';
+
+import { CategoriesComponent } from './admin/routes/dashboard/categories/categories.component';
+import { CategoriesIndexComponent } from './admin/routes/dashboard/categories/index/index.component';
+import { CategoriesAddComponent } from './admin/routes/dashboard/categories/add/add.component';
+
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AddFirstStepComponent } from './admin/routes/dashboard/categories/add/add-first-step/add-first-step.component';
+import { AddSecondStepComponent } from './admin/routes/dashboard/categories/add/add-second-step/add-second-step.component';
+import { AddThirdStepComponent } from './admin/routes/dashboard/categories/add/add-third-step/add-third-step.component';
+import { AddThirdStepPopupComponent } from './admin/routes/dashboard/categories/add/add-third-step-popup/add-third-step-popup.component';
 
 
 
@@ -46,7 +57,14 @@ const appRoutes: Routes = [
           {path: 'add', component: AddUserComponent}
         ]
       },
-      {path: 'categories', component: CategoriesComponent},
+      {
+        path: 'categories',
+        component: CategoriesComponent,
+        children: [
+          { path: '', component: CategoriesIndexComponent},
+          { path: 'add', component: CategoriesAddComponent}
+        ]
+      },
     ]
   }
 ];
@@ -66,18 +84,25 @@ const appRoutes: Routes = [
     SearchComponent,
     PaginationComponent,
     CategoriesComponent,
+    CategoriesIndexComponent,
+    CategoriesAddComponent,
     EditComponent,
     AddUserComponent,
     UsersIndexComponent,
     FormComponent,
-    ViewComponent
+    ViewComponent,
+    AddFirstStepComponent,
+    AddSecondStepComponent,
+    AddThirdStepComponent,
+    AddThirdStepPopupComponent,
   ],
   imports: [
     BrowserModule,
     HttpModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [NgDataJsonserviceService, UserServiceService],
   bootstrap: [AppComponent]

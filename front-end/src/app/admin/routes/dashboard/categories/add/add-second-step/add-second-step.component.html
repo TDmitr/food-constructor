@@ -1,0 +1,16 @@
+<div class="checkbox">
+  <input type="checkbox" id="oneSize" (change)="toggleSize()">
+  <label for="oneSize">One size</label>
+</div>
+<div class="size-control">
+  <div class="element" id="row-element-1"  *ngFor="let field of fieldArray; let i = index">
+    <input type="text" [(ngModel)]="field.size_name" name={{field.size_name}} placeholder="Size Name" [ngModelOptions]="{standalone: true}" [disabled]="!isSize">
+    <input type="text" [(ngModel)]="field.size_description" name={{field.size_description}} placeholder="Size Description" [ngModelOptions]="{standalone: true}" [disabled]="!isSize">
+    <button class="element-delete" [disabled]="!isSize">
+      <svg>
+        <use xlink:href="./assets/img/svg-sprites.svg#delete" (click)="removeRow(i)"></use>
+      </svg>
+    </button>
+  </div>
+</div>
+<button class="add-another-size" [disabled]="!isSize" (click)="addRow()" [disabled]="!isSize">Add Another Size</button>

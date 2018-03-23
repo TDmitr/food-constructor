@@ -1,8 +1,2 @@
 <header class="header">Categories</header>
-<div class="c-list">
-  <div class="c-list__item" *ngFor="let item of categories">
-    <img [src]='item.photo' alt="image">
-    <h3>{{item.name}}</h3>
-    <p>{{item.total}} dishes in category</p>
-  </div>
-</div>
+<router-outlet></router-outlet>
