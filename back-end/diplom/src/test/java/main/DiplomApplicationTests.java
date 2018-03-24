@@ -1,7 +1,8 @@
 package main;
 
 import main.Entities.User;
-import main.Entities.UserRoles;
+import main.Entities.Authority;
+import main.Repositories.AuthorityRepository;
 import main.Repositories.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,12 +16,22 @@ public class DiplomApplicationTests {
 	@Autowired
 	UserRepository userRepository;
 
+	@Autowired
+	AuthorityRepository authorityRepository;
+
 	@Test
 	public void contextLoads() {
 		User user = new User();
+		Authority authority = new Authority();
 		user.setName("IgorAdmin");
 		user.setEmail("iA@iA");
-		user.setUserRole(UserRoles.admin);
+		user.setEnabled(true);
+		user.setAuthority(authority);
+		user.setPassword("123");
+		authority.setAuthority("ADMIN");
+		authority.setUsername("Igor Admin");
+		//user.setAuthority();
+		authorityRepository.save(authority);
 		userRepository.save(user);
 	}
 

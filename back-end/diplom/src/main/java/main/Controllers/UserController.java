@@ -16,12 +16,12 @@ import java.util.List;
  * Created by igor on 3/2/18.
  */
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/all")
-    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/users")
     public Iterable<User> allUsers(){
         return userRepository.findAll();
     }
@@ -40,9 +40,9 @@ public class UserController {
 
     // -------------------Create a User-------------------------------------------
 
-    @PostMapping("/user")
+    @PostMapping("/users")
     public ResponseEntity<?> createUser(@RequestBody User user, UriComponentsBuilder uriComponentsBuilder){
-        if(userRepository.findByEmail(user.getEmail()) != null){
+        if(userRepository.findOneByEmail(user.getEmail()) != null){
             return new ResponseEntity<>(new CustomErrorType("Unable to create. A User with name " +
                     user.getName() + " already exist."), HttpStatus.CONFLICT);
         }
@@ -71,14 +71,24 @@ public class UserController {
 
     // ------------------- Delete a User-----------------------------------------
 
-    @DeleteMapping("/user/{email}")
+    @DeleteMapping("/users/{email}")
     public ResponseEntity<?> deleteUser(@PathVariable("email") String email) {
-        User user = userRepository.findByEmail(email);
+        User user = userRepository.findOneByEmail(email);
         if (user == null) {
             return new ResponseEntity<>(new CustomErrorType("Unable to delete. User with email " + email + " not found."),
                     HttpStatus.NOT_FOUND);
         }
         userRepository.deleteByEmail(email);
         return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/users/{id}")
+    public ResponseEntity findUserById(@PathVariable("id") Integer id){
+        User user = userRepository.findOne(id);
+        if (user == null) {
+            return new ResponseEntity<>(new CustomErrorType("Unable to find. User with id " + id + " not found."),
+                    HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }
