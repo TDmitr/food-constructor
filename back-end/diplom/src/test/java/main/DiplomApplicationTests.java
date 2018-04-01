@@ -27,19 +27,18 @@ public class DiplomApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		User user = new User();
 		Authority authority = new Authority();
-		user.setName("IgorAdmin");
-		user.setUsername("igor@g.g");
-		user.setEnabled(true);
-		user.setAuthority(authority);
+		authority.setAuthority("ROLE_ADMIN");
 		String sha256hex = Hashing.sha256()
 				.hashString("123", StandardCharsets.UTF_8)
 				.toString();
-		user.setPassword(sha256hex);
-		authority.setAuthority("ADMIN");
-		authority.setUsername("Igor Admin");
-		user.setAuthority(authority);
+		User user = User.builder()
+				.name("IgorAdmin")
+				.username("igor@g.g")
+				.password(sha256hex)
+				.enabled(true)
+				.authority(authority)
+				.build();
 		authorityRepository.save(authority);
 		userRepository.save(user);
 	}

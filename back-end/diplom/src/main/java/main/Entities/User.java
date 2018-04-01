@@ -1,5 +1,6 @@
 package main.Entities;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,6 +14,7 @@ import java.util.Collections;
  * Created by igor on 3/2/18.
  */
 @Data
+@Builder
 @Entity
 public class User implements UserDetails {
     @Id

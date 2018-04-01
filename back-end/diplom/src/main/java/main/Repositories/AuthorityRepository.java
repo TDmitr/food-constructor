@@ -14,4 +14,5 @@ import javax.transaction.Transactional;
 @Transactional
 @CrossOrigin(origins = "http://localhost:4200")
 public interface AuthorityRepository extends JpaRepository<Authority, Integer> {
+    Authority findAuthorityByAuthority(String authority);
 }

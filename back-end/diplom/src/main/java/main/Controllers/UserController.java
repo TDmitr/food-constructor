@@ -1,7 +1,12 @@
 package main.Controllers;
 
+import com.google.common.hash.Hashing;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import main.CustomErrorType;
+import main.Entities.Authority;
 import main.Entities.User;
+import main.Repositories.AuthorityRepository;
 import main.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -10,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -20,6 +26,8 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AuthorityRepository authorityRepository;
 
     @GetMapping("/users")
     public Iterable<User> allUsers(){
@@ -41,14 +49,29 @@ public class UserController {
     // -------------------Create a User-------------------------------------------
 
     @PostMapping("/users")
-    public ResponseEntity<?> createUser(@RequestBody User user, UriComponentsBuilder uriComponentsBuilder){
-        if(userRepository.findUserByUsername(user.getUsername()) != null){
+    public ResponseEntity<?> createUser(@RequestBody TempUser tempUser, UriComponentsBuilder uriComponentsBuilder){
+        if(userRepository.findUserByUsername(tempUser.getUsername()) != null){
             return new ResponseEntity<>(new CustomErrorType("Unable to create. A User with name " +
-                    user.getName() + " already exist."), HttpStatus.CONFLICT);
+                    tempUser.getUsername() + " already exist."), HttpStatus.CONFLICT);
         }
-        userRepository.save(user);
+
+        Authority tempAuth = authorityRepository.findAuthorityByAuthority("ROLE_" + tempUser.getAuthority().toUpperCase());
+        if(tempAuth == null) {
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. No such authority " +
+                    tempUser.getAuthority()), HttpStatus.CONFLICT);
+        }
+        String passHex = Hashing.sha256()
+                .hashString(tempUser.password, StandardCharsets.UTF_8)
+                .toString();
+        User newUser = User.builder()
+                .authority(tempAuth)
+                .username(tempUser.username)
+                .password(passHex)
+                .enabled(true)
+                .build();
+        userRepository.save(newUser);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(uriComponentsBuilder.path("/user/{id}").buildAndExpand(user.getId()).toUri());
+        headers.setLocation(uriComponentsBuilder.path("/user/{id}").buildAndExpand(newUser.getId()).toUri());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
@@ -90,5 +113,12 @@ public class UserController {
                     HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @Data
+    private static final class TempUser{
+        private String username;
+        private String password;
+        private String authority;
     }
 }

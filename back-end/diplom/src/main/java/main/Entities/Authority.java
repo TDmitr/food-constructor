@@ -16,7 +16,7 @@ public class Authority {
     @GeneratedValue(strategy = GenerationType.AUTO)
     //@Basic(optional = false)
     private Integer id;
-    private String username;
+    //private String username;
     private String authority;
     @OneToMany(mappedBy = "authority")
     @JsonIgnore
