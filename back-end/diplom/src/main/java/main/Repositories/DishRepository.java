@@ -1,0 +1,8 @@
+package main.Repositories;
+
+
+import main.Entities.Dish;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface DishRepository extends JpaRepository<Dish, Long> {
+}

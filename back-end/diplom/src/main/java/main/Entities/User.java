@@ -12,9 +12,18 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     private String name;
     private String email;
     private UserRoles userRole;
+
+    public User(String name, String email, UserRoles userRole) {
+        this.name = name;
+        this.email = email;
+        this.userRole = userRole;
+    }
+
+    public User() {
+    }
 }

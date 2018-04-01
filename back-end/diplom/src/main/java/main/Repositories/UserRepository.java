@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
 @RepositoryRestResource
 @Transactional
 @CrossOrigin(origins = "http://localhost:4200")
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Long> {
     User findByEmail(String email);
     void deleteByEmail(String email);
 }
