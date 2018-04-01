@@ -108,7 +108,7 @@ public class DBTest {
     */
 
     @Test
-    public void overallTest()
+    public void overallTest() throws InterruptedException
     {
         testType();
         testPropertyName();
@@ -160,7 +160,7 @@ public class DBTest {
     }
 
     @Test
-    public void testIngredient()
+    public void testIngredient() throws InterruptedException
     {
         Ingredient chickenMeat = new Ingredient("Chicken meat", 0.3d,
                 new BigDecimal(10), meat, new ArrayList<>());
@@ -177,6 +177,8 @@ public class DBTest {
         ingredientRepository.save(chickenMeat);
         ingredientRepository.save(goatMeat);
         ingredientRepository.save(burgerBread);
+        Thread.sleep(5000);
+        System.out.println(ingredientRepository.findAll());
         assertTrue(ingredientRepository.findAll().containsAll(ingredients));
         necessaryIngs.add(burgerBread);
         bigBurgerIngredients.add(chickenMeat);
