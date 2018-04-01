@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
-        final Optional<User> user = Optional.of(userRepository.findOneByEmail(username));
+        final Optional<User> user = Optional.of(userRepository.findUserByUsername(username));
         final AccountStatusUserDetailsChecker detailsChecker = new AccountStatusUserDetailsChecker();
         user.ifPresent(detailsChecker::check);
         return user.orElseThrow(() -> new UsernameNotFoundException("User not found"));

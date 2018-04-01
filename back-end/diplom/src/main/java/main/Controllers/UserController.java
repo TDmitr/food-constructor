@@ -42,7 +42,7 @@ public class UserController {
 
     @PostMapping("/users")
     public ResponseEntity<?> createUser(@RequestBody User user, UriComponentsBuilder uriComponentsBuilder){
-        if(userRepository.findOneByEmail(user.getEmail()) != null){
+        if(userRepository.findUserByUsername(user.getUsername()) != null){
             return new ResponseEntity<>(new CustomErrorType("Unable to create. A User with name " +
                     user.getName() + " already exist."), HttpStatus.CONFLICT);
         }
@@ -73,12 +73,12 @@ public class UserController {
 
     @DeleteMapping("/users/{email}")
     public ResponseEntity<?> deleteUser(@PathVariable("email") String email) {
-        User user = userRepository.findOneByEmail(email);
+        User user = userRepository.findUserByUsername(email);
         if (user == null) {
             return new ResponseEntity<>(new CustomErrorType("Unable to delete. User with email " + email + " not found."),
                     HttpStatus.NOT_FOUND);
         }
-        userRepository.deleteByEmail(email);
+        userRepository.deleteByUsername(email);
         return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
     }
 

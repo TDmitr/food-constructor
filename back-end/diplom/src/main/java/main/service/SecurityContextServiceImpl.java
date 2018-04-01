@@ -28,6 +28,6 @@ public class SecurityContextServiceImpl implements SecurityContextService {
     @Override
     public Optional<User> currentUser() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return Optional.of(userRepository.findOneByEmail(authentication.getName()));
+        return Optional.of(userRepository.findUserByUsername(authentication.getName()));
     }
 }

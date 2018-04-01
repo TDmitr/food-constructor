@@ -21,7 +21,7 @@ public class User implements UserDetails {
 
     @Getter
     private String name;
-    private String email;
+    private String username;
     private String password;
     private Boolean enabled;
 
@@ -35,8 +35,13 @@ public class User implements UserDetails {
         return Collections.singleton(() -> authority.getAuthority());
     }
 
+    @Override
+    public String getPassword() {
+        return password;
+    }
+    @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override

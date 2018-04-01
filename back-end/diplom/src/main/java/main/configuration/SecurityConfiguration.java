@@ -56,6 +56,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").hasRole(AUTHORIZED_ROLE)
                 .antMatchers("/allUsers").hasRole(AUTHORIZED_ROLE)
                 .antMatchers(HttpMethod.GET, "/users").permitAll()
+                //.antMatchers("/login").permitAll()
                 //.antMatchers(HttpMethod.GET, "/transactions/list").hasRole(AUTHORIZED_ROLE) // maybe has role
 //                .antMatchers(HttpMethod.GET, "/categories/list").hasRole(AUTHORIZED_ROLE)
 //                .antMatchers(HttpMethod.OPTIONS, "/transactions/list").permitAll()

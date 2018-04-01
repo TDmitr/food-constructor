@@ -14,6 +14,6 @@ import javax.transaction.Transactional;
 @Transactional
 @CrossOrigin(origins = "http://localhost:4200")
 public interface UserRepository extends JpaRepository<User, Integer> {
-    User findOneByEmail(String email);
-    void deleteByEmail(String email);
+    User findUserByUsername(String username);
+    void deleteByUsername(String email);
 }
