@@ -35,7 +35,10 @@ import { AddFirstStepComponent } from './admin/routes/dashboard/categories/add/a
 import { AddSecondStepComponent } from './admin/routes/dashboard/categories/add/add-second-step/add-second-step.component';
 import { AddThirdStepComponent } from './admin/routes/dashboard/categories/add/add-third-step/add-third-step.component';
 import { AddThirdStepPopupComponent } from './admin/routes/dashboard/categories/add/add-third-step-popup/add-third-step-popup.component';
-
+import { IngredientsGroupComponent} from './admin/routes/dashboard/ingredients/group/group.component';
+import { IngredientsAddGroupComponent } from './admin/routes/dashboard/ingredients/group/add/add.component';
+import { IngredientsIndexGroupComponent} from './admin/routes/dashboard/ingredients/group/index/index.component';
+import { GridComponent } from './admin/components/grid/grid.component';
 
 
 const appRoutes: Routes = [
@@ -65,6 +68,14 @@ const appRoutes: Routes = [
           { path: 'add', component: CategoriesAddComponent}
         ]
       },
+      {
+        path: 'ingredients/groups',
+        component: IngredientsGroupComponent,
+        children: [
+          {path: '', component: IngredientsIndexGroupComponent},
+          {path: 'add', component: IngredientsAddGroupComponent}
+        ]
+      }
     ]
   }
 ];
@@ -95,6 +106,10 @@ const appRoutes: Routes = [
     AddSecondStepComponent,
     AddThirdStepComponent,
     AddThirdStepPopupComponent,
+    IngredientsGroupComponent,
+    IngredientsAddGroupComponent,
+    IngredientsIndexGroupComponent,
+    GridComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,50 @@
+.c-list
+  width: 100%
+  padding: 45px 50px
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  justify-content: flex-start
+
+  &__item
+    min-width: 22%
+    width: 22%
+    background: white
+    margin: 10px 1.5%
+    padding: 25px
+    text-align: center
+    position: relative
+    cursor: pointer
+    transition: transform .3s, box-shadow .3s
+    &:hover
+      transform: translateY(-7px)
+      box-shadow: 0 0 10px 0 rgba(0,0,0, .1)
+
+    &:after
+      z-index: -1
+      content: ''
+      width: 80%
+      height: 50%
+      position: absolute
+      bottom: 7px
+      left: 0
+      right: 0
+      margin: auto
+      background: none
+      border-radius: 50%
+      box-shadow: 0 12px 10px rgba(0,0,0,0.3)
+      transition: opacity .4s
+      opacity: 0
+
+    svg
+      width: 100%
+      height: 100px
+
+    h3
+      font-size: 25px
+      font-weight: 600
+      margin: 15px 0 0
+
+    p
+      font-size: 14px
+

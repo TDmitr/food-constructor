@@ -16,7 +16,7 @@
     "children": [
       {"name": "Categories", "icon": "home", "path": "/categories"},
       {"name": "Dishes", "icon": "user", "path": "/dishes"},
-      {"name": "Ingredients", "icon": "manager", "path": "/ingredients"}
+      {"name": "Ingredients", "icon": "manager", "path": "/ingredients/groups"}
     ]
   }
 ]

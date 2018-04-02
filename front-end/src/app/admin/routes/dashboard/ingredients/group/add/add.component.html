@@ -1,0 +1,25 @@
+<div class="category-add">
+  <div class="add-header" >
+    <div class="add-header-item" *ngFor="let step of steps" [class.active]="state == step" (click)="changeState(step)">{{step}}</div>
+  </div>
+  <form>
+    <div class="add-content" *ngIf="state == 1">
+      <h3>STEP 1: Fill category details</h3>
+      <app-add-first-step></app-add-first-step>
+      <div class="add-content__controls">
+        <a [routerLink]="['../']" class="add-content__controls__btn add-content__controls__btn--transparent">Cancel</a>
+        <button class="add-content__controls__btn add-content__controls__btn--blue" (click)="nextStep()">Next</button>
+      </div>
+    </div>
+
+    <div class="add-content" *ngIf="state == 2">
+      <h3>STEP 2: Describe size properties</h3>
+      <app-add-second-step></app-add-second-step>
+      <div class="add-content__controls">
+        <button class="add-content__controls__btn add-content__controls__btn--blue" (click)="prevStep()">Back</button>
+        <button class="add-content__controls__btn add-content__controls__btn--green">Submit</button>
+      </div>
+    </div>
+
+  </form>
+</div>
