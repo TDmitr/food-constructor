@@ -1,19 +1,20 @@
 package main.Entities;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+//@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "ingredient")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Ingredient {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -25,9 +26,9 @@ public class Ingredient {
 
     private BigDecimal price;
 
-    @ManyToOne
-    @JoinColumn(name="ingredient_type_id", nullable=false)
-    @JsonManagedReference
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="ingredient_type_id")
+    @JsonIgnoreProperties("ingredients")
     private IngredientType ingredientType;
 
     @Lob

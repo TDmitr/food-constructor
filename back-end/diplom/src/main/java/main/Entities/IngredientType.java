@@ -1,18 +1,19 @@
 package main.Entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+//@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "ingredient_type")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class IngredientType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,7 +26,7 @@ public class IngredientType {
     private byte[] image;
 
     @OneToMany(mappedBy = "ingredientType")
-    @JsonBackReference
+    @JsonIgnoreProperties("ingredientType")
     private Set<Ingredient> ingredients;
 
     @ManyToMany(mappedBy = "ingredientTypes")

@@ -3,6 +3,7 @@ package main.Controllers;
 import main.CustomErrorType;
 import main.Entities.Ingredient;
 import main.Repositories.IngredientRepository;
+import main.Repositories.IngredientTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,9 @@ public class IngredientController {
 
     @Autowired
     private IngredientRepository ingredientRepository;
+
+    @Autowired
+    private IngredientTypeRepository ingredientTypeRepository;
 
     @GetMapping("/allIngredients")
     public ResponseEntity<?> listAllIngredientTypes() {
@@ -45,6 +49,15 @@ public class IngredientController {
         if(ingredientRepository.findByName(ingredient.getName()) != null)
             return new ResponseEntity<>(new CustomErrorType("Unable to create. An ingredient with name " +
                     ingredient.getName() + " already exist."), HttpStatus.CONFLICT);
+//        IngredientType ingType = ingredientTypeRepository.findById(ingredient.getIngredientType().getId());
+//        if(ingType == null) {
+//            ingredient.getIngredientType().addIngredient(ingredient);
+//            ingredientTypeRepository.save(ingredient.getIngredientType());
+//        }
+//        if (!ingType.equals(ingredient.getIngredientType()))
+//            return new ResponseEntity<>(new CustomErrorType("Unable to create. An ingredientType with Id " +
+//                    ingredient.getIngredientType().getId() + " exists and is different"), HttpStatus.CONFLICT);
+//        ingredientTypeRepository.save(ingredient.getIngredientType());
         ingredientRepository.save(ingredient);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(uriComponentsBuilder.path("/ingredientType/{id}").buildAndExpand(ingredient.getId()).toUri());
