@@ -9,11 +9,9 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 
-/**
- * Created by igor on 3/2/18.
- */
 @Data
 @Entity
+@Table(name = "user")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
