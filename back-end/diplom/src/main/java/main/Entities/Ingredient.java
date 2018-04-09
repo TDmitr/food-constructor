@@ -1,13 +1,19 @@
 package main.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
+@Table(name = "ingredient")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
 public class Ingredient {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -15,22 +21,46 @@ public class Ingredient {
 
     private String name;
 
-    private double weight;
+    private String weight;
 
     private BigDecimal price;
 
     @ManyToOne
-    private Type type;
+    @JoinColumn(name="ingredient_type_id", nullable=false)
+    @JsonManagedReference
+    private IngredientType ingredientType;
 
-    @ManyToMany
-    private List<Property> addedProperties;
+    @Lob
+    @Column(name="image", columnDefinition="mediumblob")
+    private byte[] image;
 
-    public Ingredient(String name, double weight, BigDecimal price, Type type, List<Property> addedProperties) {
+    @ManyToMany(mappedBy = "ingredients")
+    private Set<Dish> dishes;
+
+    @ManyToMany(mappedBy = "necessaryIngredients")
+    private Set<DishType> dishTypes;
+
+    @OneToMany(mappedBy = "ingredient")
+    private Set<IngredientProperty> ingredientProperties;
+
+    public Ingredient(String name, String weight, BigDecimal price, IngredientType ingredientType, byte[] image,
+                      Set<Dish> dishes, Set<DishType> dishTypes, Set<IngredientProperty> ingredientProperties) {
         this.name = name;
         this.weight = weight;
         this.price = price;
-        this.type = type;
-        this.addedProperties = addedProperties;
+        this.ingredientType = ingredientType;
+        this.image = image;
+        this.dishes = dishes;
+        this.dishTypes = dishTypes;
+        this.ingredientProperties = ingredientProperties;
+    }
+
+    public Ingredient(String name, String weight, BigDecimal price, IngredientType ingredientType, byte[] image) {
+        this(name,weight,price,ingredientType,image, new HashSet<>(), new HashSet<>(),new HashSet<>());
+    }
+
+    public Ingredient(String name, String weight, BigDecimal price, IngredientType ingredientType) {
+        this(name,weight,price,ingredientType,new byte[]{}, new HashSet<>(), new HashSet<>(),new HashSet<>());
     }
 
     public Ingredient() {

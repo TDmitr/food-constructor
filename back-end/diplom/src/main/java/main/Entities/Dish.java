@@ -4,11 +4,11 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Data
 @Entity
+@Table(name = "dish")
 public class Dish {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,17 +16,31 @@ public class Dish {
 
     private String name;
 
-    @OneToMany
-    private List<Ingredient> ingredients;
-
     @ManyToOne
+    @JoinColumn(name="dish_type_id", nullable=false)
     private DishType dishType;
 
-    public Dish(String name, List<Ingredient> ingredients, DishType dishType) {
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "dish_ingredient",
+            joinColumns = { @JoinColumn(name = "dish_id") },
+            inverseJoinColumns = { @JoinColumn(name = "ingredient_id") }
+    )
+    private List<Ingredient> ingredients;
+
+    @OneToMany(mappedBy = "dish")
+    private Set<OrderDish> orderDishes;
+
+    public Dish(String name, DishType dishType, List<Ingredient> ingredients,Set<OrderDish> orderDishes) {
         this.name = name;
-        this.ingredients = ingredients;
         this.dishType = dishType;
+        this.ingredients = ingredients;
         ingredients.addAll(dishType.getNecessaryIngredients());
+        this.orderDishes = orderDishes;
+    }
+
+    public Dish(String name, DishType dishType){
+        this(name,dishType, new ArrayList<>(), new HashSet<>());
     }
 
     public Dish(){}
@@ -42,12 +56,7 @@ public class Dish {
         return result.add(dishType.getBasePrice());
     }
 
-    protected double getWeight()
-    {
-        List<Ingredient> weightIngredients = new ArrayList<Ingredient>(ingredients);
-        weightIngredients.removeAll(dishType.getNecessaryIngredients());
-        return weightIngredients.stream().mapToDouble(Ingredient::getWeight).sum() + dishType.getBaseWeight();
-    }
+
 
 
 }

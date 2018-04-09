@@ -10,11 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import java.util.HashSet;
 
 
 @RunWith(SpringRunner.class)
@@ -33,10 +29,10 @@ public class DBTest {
     private OrderRepository orderRepository;
 
     @Autowired
-    private TypeRepository typeRepository;
+    private IngredientTypeRepository ingredientTypeRepository;
 
     @Autowired
-    private PropertyNameRepository propertyNameRepository;
+    private PropertyTypeRepository propertyTypeRepository;
 
     @Autowired
     private PropertyRepository propertyRepository;
@@ -44,19 +40,15 @@ public class DBTest {
     @Autowired
     private UserRepository userRepository;
 
-    private Type meat;
+    private IngredientType meat;
 
-    private Type bread;
+    private IngredientType bread;
 
-    private PropertyName roast;
-
-    private Property wellDoneRoast;
-
-    private Property mediumRoast;
+    private PropertyType roast;
 
     private ArrayList<Ingredient> necessaryIngs = new ArrayList<>();;
 
-    private ArrayList<Type> validTypes = new ArrayList<>();;
+    private ArrayList<IngredientType> validIngredientTypes = new ArrayList<>();;
 
     private DishType burger;
 
@@ -67,6 +59,32 @@ public class DBTest {
     private ArrayList<Dish> dishList = new ArrayList<>();
 
     private User user;
+
+    @Test
+    public void overallTest() throws InterruptedException
+    {
+        testType();
+        testIngredient();
+    }
+
+    @Test
+    public void testType()
+    {
+        IngredientType meat = new IngredientType("Meat");
+        ingredientTypeRepository.save(meat);
+        this.meat = meat;
+        IngredientType bread = new IngredientType("Bread");
+        ingredientTypeRepository.save(bread);
+        this.bread = bread;
+    }
+
+    @Test
+    public void testIngredient(){
+        Ingredient chickenMeat = new Ingredient("Chicken meat", "0.3", new BigDecimal(10),
+                meat, new byte[]{}, new HashSet<>(), new HashSet<>(),new HashSet<>());
+        meat.addIngredient(chickenMeat);
+        ingredientRepository.save(chickenMeat);
+    }
 
     /*
     @Test
@@ -105,15 +123,14 @@ public class DBTest {
         dishList.add(smallBurger);
         Order order = createOrder(dishList,user,"Kek Street 1",new Date());
     }
-    */
+
 
     @Test
     public void overallTest() throws InterruptedException
     {
         testType();
         testPropertyName();
-        testProperty();
-        testIngredient();
+        testIngredientandProperty();
         testDishType();
         testDish();
         testUser();
@@ -123,51 +140,45 @@ public class DBTest {
     @Test
     public void testType()
     {
-        Type meat = createType("Meat");
+        IngredientType meat = createType("Meat");
         typeRepository.save(meat);
         this.meat = meat;
-        Type bread = new Type("Bread");
+        IngredientType bread = new IngredientType("Bread");
         typeRepository.save(bread);
         this.bread = bread;
-        validTypes.add(bread);
-        validTypes.add(meat);
-        ArrayList<Type> types = new ArrayList<>();
-        types.add(meat);
-        types.add(bread);
-        assertTrue(typeRepository.findAll().containsAll(types));
+        validIngredientTypes.add(bread);
+        validIngredientTypes.add(meat);
+        ArrayList<IngredientType> ingredientTypes = new ArrayList<>();
+        ingredientTypes.add(meat);
+        ingredientTypes.add(bread);
+        assertTrue(typeRepository.findAll().containsAll(ingredientTypes));
     }
 
     @Test
     public void testPropertyName()
     {
-        PropertyName roast = createPropertyName("Roast",meat);
+        PropertyType roast = createPropertyName("Roast",meat);
         propertyNameRepository.save(roast);
         this.roast = roast;
         assertTrue(propertyNameRepository.findAll().contains(roast));
     }
 
     @Test
-    public void testProperty()
+    public void testIngredientandProperty() throws InterruptedException
     {
-        Property wellDoneRoast = createProperty("Well done roast",roast);
-        Property mediumRoast = createProperty("Medium roast",roast);
+        Property wellDoneRoast = new Property("Well done roast",roast, new ArrayList<>());
+        Property mediumRoast = new Property("Medium roast",roast, new ArrayList<>());
         ArrayList<Property> properties = new ArrayList<>();
         properties.add(wellDoneRoast);
         properties.add(mediumRoast);
-        this.wellDoneRoast = wellDoneRoast;
-        this.mediumRoast = mediumRoast;
-        assertTrue(propertyRepository.findAll().containsAll(properties));
-    }
-
-    @Test
-    public void testIngredient() throws InterruptedException
-    {
         Ingredient chickenMeat = new Ingredient("Chicken meat", 0.3d,
                 new BigDecimal(10), meat, new ArrayList<>());
         chickenMeat.getAddedProperties().add(wellDoneRoast);
+        wellDoneRoast.getAllowedIngredients().add(chickenMeat);
         Ingredient goatMeat = new Ingredient("Goat meat", 0.25d,
                 new BigDecimal(15), meat, new ArrayList<>());
         goatMeat.getAddedProperties().add(mediumRoast);
+        mediumRoast.getAllowedIngredients().add(goatMeat);
         Ingredient burgerBread = new Ingredient("Burger bread", 0.1d,
                 new BigDecimal(5), bread, new ArrayList<>());
         ArrayList<Ingredient> ingredients = new ArrayList<>();
@@ -177,7 +188,10 @@ public class DBTest {
         ingredientRepository.save(chickenMeat);
         ingredientRepository.save(goatMeat);
         ingredientRepository.save(burgerBread);
+        propertyRepository.save(wellDoneRoast);
+        propertyRepository.save(mediumRoast);
         Thread.sleep(5000);
+        assertTrue(propertyRepository.findAll().containsAll(properties));
         System.out.println(ingredientRepository.findAll());
         assertTrue(ingredientRepository.findAll().containsAll(ingredients));
         necessaryIngs.add(burgerBread);
@@ -191,7 +205,7 @@ public class DBTest {
     @Test
     public void testDishType()
     {
-        DishType burger = createDishType("Burger", necessaryIngs, validTypes,
+        DishType burger = createDishType("Burger", necessaryIngs, validIngredientTypes,
                 new BigDecimal(10),0.2d);
         this.burger = burger;
         assertTrue(dishTypeRepository.findAll().contains(burger));
@@ -227,35 +241,35 @@ public class DBTest {
 
 
 
-    private DishType createDishType(String burger, ArrayList<Ingredient> necessaryIngs, ArrayList<Type> validTypes, BigDecimal bigDecimal, double baseWeight) {
-        DishType dishType = new DishType(burger, necessaryIngs, validTypes, bigDecimal, baseWeight);
+    private DishType createDishType(String burger, ArrayList<Ingredient> necessaryIngs, ArrayList<IngredientType> validIngredientTypes, BigDecimal bigDecimal, double baseWeight) {
+        DishType dishType = new DishType(burger, necessaryIngs, validIngredientTypes, bigDecimal, baseWeight);
         dishTypeRepository.save(dishType);
         return dishType;
     }
 
 
-    private Type createType(String name) {
-        Type type = new Type(name);
-        typeRepository.save(type);
-        return type;
+    private IngredientType createType(String name) {
+        IngredientType ingredientType = new IngredientType(name);
+        typeRepository.save(ingredientType);
+        return ingredientType;
     }
 
-    /*
+
     private Ingredient createIngredient(String name, double weight, BigDecimal price, Type type, List<Property> addedProperties) {
         Ingredient ingredient = new Ingredient(name, weight, price, type, addedProperties);
         ingredientRepository.save(ingredient);
         return ingredient;
     }
-    */
 
-    private PropertyName createPropertyName(String name, Type type) {
-        PropertyName propertyName = new PropertyName(name, type);
-        propertyNameRepository.save(propertyName);
-        return propertyName;
+
+    private PropertyType createPropertyName(String name, IngredientType ingredientType) {
+        PropertyType propertyType = new PropertyType(name, ingredientType);
+        propertyNameRepository.save(propertyType);
+        return propertyType;
     }
 
-    private Property createProperty(String name, PropertyName propertyName) {
-        Property property = new Property(name, propertyName);
+    private Property createProperty(String name, PropertyType propertyType, List<Ingredient> allowedIngredients) {
+        Property property = new Property(name, propertyType, allowedIngredients);
         propertyRepository.save(property);
         return property;
     }
@@ -277,5 +291,5 @@ public class DBTest {
         dishRepository.save(dish);
         return dish;
     }
-
+*/
 }
