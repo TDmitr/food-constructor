@@ -1,0 +1,159 @@
+header
+  display: block
+  position: fixed
+  width: 100%
+  left: 0
+  top: 0
+  z-index: 5
+  .hd-top
+    width: 100%
+    padding: 20px 5%
+    display: flex
+    justify-content: space-between
+    align-items: center
+    background: #141e30 /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #141e30, #243b55) /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #141e30, #243b55) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    &__logo
+      font-size: 30px
+      color: white
+      font-weight: 700
+      width: 30%
+      text-transform: uppercase
+    &__search
+      width: 50%
+      padding: 0 20px
+      input
+        width: 100%
+        padding: 0 25px
+        height: 30px
+        font-size: 17px
+        border: none
+        color: white
+        background: rgba(255,255,255, .1)
+        &::placeholder
+          color: white
+          opacity: .8
+
+    &__account
+      display: flex
+      a
+        display: block
+        position: relative
+        width: 40px
+        height: 40px
+        border: 1px solid white
+        border-radius: 50%
+        margin: 0 0 0 10px
+        transition: background .3s
+        &:hover
+          background: rgba(255,255,255,.1)
+        span
+          display: block
+          position: absolute
+          font-size: 13px
+          width: 25px
+          height: 25px
+          padding: 3px 0
+          background: white
+          border-radius: 50%
+          font-weight: 500
+          text-align: center
+          top: -10px
+          right: -10px
+          border: 1px solid #141e30
+      svg
+        fill: white
+        height: 18px
+        width: 18px
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-51%, -50%)
+
+  .hd-bottom
+    width: 100%
+    padding: 0 5%
+    display: flex
+    border-bottom: 1px solid lavender
+    position: relative
+    height: 50px
+    background: white
+
+    &__item
+      color: #141e30
+      height: 100%
+      text-transform: uppercase
+      font-weight: 400
+      line-height: 50px
+      font-size: 18px
+      padding: 0 25px
+      cursor: pointer
+      border-right: 1px solid lavender
+      background: white
+      transition: background .3s ease-in-out
+      z-index: 100
+      &:hover
+        background: lavender
+      &:first-child
+        border-left: 1px solid lavender
+
+      ul.submenu
+        opacity: 0
+        width: 100%
+        max-height: 0
+        overflow: hidden
+        border-top: 1px solid lavender
+        border-bottom: 1px solid lavender
+        position: absolute
+        margin: 0
+        top: 100%
+        left: 0
+        column-count: 3
+        column-rule: 1px solid lavender
+        background: #f8f8ff
+        transition: opacity .3s
+        padding: 0
+
+
+        li
+          list-style: none
+          line-height: 2
+          padding: 0 15px
+          column-fill: auto
+          text-transform: none
+          a
+            color: lighten(#141e30, 10%)
+            border-bottom: 1px solid transparent
+            transition: border-bottom .3s
+          a:hover
+            border-bottom-color: lighten(#141e30, 10%)
+
+      &.dropdown:after
+          content: ''
+          display: block
+          position: absolute
+          width: 0
+          height: 0
+          border-left: 10px solid transparent
+          border-right: 10px solid transparent
+          border-top: 10px solid lavender
+          opacity: 0
+          transition: opacity .3s
+
+      &:hover
+        ul.submenu
+          opacity: 1
+          max-height: 999px
+          padding: 15px 5%
+      &.dropdown:hover
+        cursor: auto
+        &:after
+          opacity: 1
+
+.content
+  margin-top: 150px
+  padding: 0 5%
+  z-index: 0
+

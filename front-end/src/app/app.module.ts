@@ -39,12 +39,18 @@ import { IngredientsGroupComponent} from './admin/routes/dashboard/ingredients/g
 import { IngredientsAddGroupComponent } from './admin/routes/dashboard/ingredients/group/add/add.component';
 import { IngredientsIndexGroupComponent} from './admin/routes/dashboard/ingredients/group/index/index.component';
 import { GridComponent } from './admin/components/grid/grid.component';
+import {SiteMainRouter} from './site/routes/main/main.component';
+import { SiteCategoryComponent } from './site/routes/site-category/site-category.component';
+import { SiteCategoryItemComponent } from './site/components/site-category-item/site-category-item.component';
+import { SiteCategoryItemInfoComponent } from './site/routes/site-category-item-info/site-category-item-info.component';
+import {CartService} from "./site/services/cart.service";
 
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
+  {path: '', component: SiteMainRouter},
   {
-    path: '',
+    path: 'admin',
     component: MainComponent,
     children: [
       {path: 'index', component: IndexComponent},
@@ -109,7 +115,11 @@ const appRoutes: Routes = [
     IngredientsGroupComponent,
     IngredientsAddGroupComponent,
     IngredientsIndexGroupComponent,
-    GridComponent
+    GridComponent,
+    SiteMainRouter,
+    SiteCategoryComponent,
+    SiteCategoryItemComponent,
+    SiteCategoryItemInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -119,7 +129,7 @@ const appRoutes: Routes = [
     FormsModule,
     BrowserAnimationsModule
   ],
-  providers: [NgDataJsonserviceService, UserServiceService],
+  providers: [NgDataJsonserviceService, UserServiceService, CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
