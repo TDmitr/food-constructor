@@ -1,19 +1,19 @@
 <div class="item">
   <div class="item__img">
-    <a href="#">Quick view</a>
+    <a [routerLink]="['view']">Quick view</a>
   </div>
-  <header>Item Name</header>
+  <header class="item__header">{{dish.name}}</header>
+  <div class="item__weight">{{dish.weight}}</div>
   <div class="item__price">
-    <span class="curr">UAH</span>
-    <span class="num"> 45.50</span>
+    <span class="curr">{{dish.currency}}</span>
+    <span class="num">{{dish.price}}</span>
   </div>
   <div class="item__add">
-    <button class="item__add-fav">
+    <button class="item__add-fav" [class.active]="isFavourite()" (click)="addToFavourites()">
       <svg>
         <use xlink:href="./assets/img/svg-sprites.svg#like"></use>
       </svg>
     </button>
-    <input type="number" value="1" min="1">
     <button class="item__add-cart" (click)="addToCart()">
       <svg>
         <use xlink:href="./assets/img/svg-sprites.svg#basket"></use>

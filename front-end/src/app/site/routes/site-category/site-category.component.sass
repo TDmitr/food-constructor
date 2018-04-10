@@ -1,4 +1,15 @@
+@import "../../../styles/app.sass"
+
 .category
+  &__header
+    padding: 25px 0
+    text-align: center
+    text-transform: uppercase
+    color: #D32E5E
+    font:
+      size: 32px
+      weight: 700
+
   &__body
     display: flex
     flex-wrap: wrap
@@ -6,3 +17,6 @@
     width: 100%
     position: relative
     align-items: flex-start
+    padding: 0 10px 25px
+    @include tablets
+      padding: 0 10% 25px

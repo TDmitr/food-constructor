@@ -1,3 +1,40 @@
-<p>
-  site-category-item-info works!
-</p>
+<div class="view-item">
+  <div class="view-item__content">
+    <a [routerLink]="['']"class="close"></a>
+    <header>Very good product (400g)</header>
+    <div class="item-block item-block--row">
+      <div class="item-block__img"></div>
+      <div class="item-block__aside">
+        <div class="item-block__description">
+          Very good and tasty meal.
+        </div>
+        <div class="item-block__food">
+          <app-dish-ingredients></app-dish-ingredients>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-block item-block--lavender">
+      <div class="item-block__price">
+        <span>UAH</span>
+        <span>10.00</span>
+      </div>
+
+      <div class="item-block__cart">
+        <input type="number" min="1" value="1">
+        <button>Add to cart</button>
+      </div>
+
+      <div class="item-block__favourites">
+        <button>
+          <svg>
+            <use xlink:href="./assets/img/svg-sprites.svg#like"></use>
+          </svg>
+          Add to favourites
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</div>

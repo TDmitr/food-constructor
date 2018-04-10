@@ -217,32 +217,24 @@ header
             border-bottom-color: lighten(#141e30, 10%)
 
       &.dropdown:after
-          content: ''
-          display: block
-          position: absolute
-          width: 0
-          height: 0
-          border-left: 10px solid transparent
-          border-right: 10px solid transparent
-          border-top: 10px solid lavender
-          opacity: 0
-          transition: opacity .3s
+        content: ''
+        display: block
+        position: absolute
+        width: 0
+        height: 0
+        border-left: 10px solid transparent
+        border-right: 10px solid transparent
+        border-top: 10px solid lavender
+        opacity: 0
+        transition: opacity .3s
 
       &:hover ul.submenu
-          opacity: 1
-          padding: 15px 5%
-          border-top: 1px solid lavender
-          border-bottom: 1px solid lavender
-          max-height: 9999px
+        opacity: 1
+        padding: 15px 5%
+        border-top: 1px solid lavender
+        border-bottom: 1px solid lavender
+        max-height: 9999px
       &.dropdown:hover
         cursor: auto
         &:after
           opacity: 1
-
-
-.content
-  margin-top: 150px
-  z-index: 0
-  @include tablets
-    padding: 0 5%
-

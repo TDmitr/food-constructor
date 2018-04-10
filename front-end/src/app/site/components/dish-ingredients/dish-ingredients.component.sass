@@ -1,0 +1,70 @@
+.label
+  display: inline-block
+  position: relative
+  padding: 5px 27px 5px 10px
+  border: 1px solid black
+  font-size: 14px
+  margin: 5px 2px
+
+  &__add
+    display: inline-block
+    position: relative
+    //padding: 5px 27px 5px 10px
+    border: none
+    width: 25px
+    height: 25px
+    border-radius: 50%
+    background: #54A15C
+    cursor: pointer
+    margin: 5px 5px
+    vertical-align: middle
+    transition: background .3s ease
+    &:hover
+      background: darken(#54A15C, 5%)
+    &:active
+      transform: scale(1.1)
+    svg
+      width: 15px
+      height: 15px
+      fill: white
+      position: absolute
+      top: 5px
+      left: 5px
+
+  &__close,
+  &__change
+    width: 12px
+    right: 10px
+    position: absolute
+    top: 0
+    border: none
+    display: inline-block
+    cursor: pointer
+
+  &__close
+    height: 100%
+    &:before,
+    &:after
+      content: ''
+      display: block
+      position: absolute
+      background: black
+      width: 11px
+      height: 1px
+      right: 0
+    &:before
+      transform: rotate(45deg)
+    &:after
+      transform: rotate(-45deg)
+
+  &__change
+    top: 5px
+    svg
+      position: absolute
+      top: 0
+      left: 0
+      height: 15px
+      width: 20px
+      transform: rotate(90deg)
+      fill: #72AFD9
+

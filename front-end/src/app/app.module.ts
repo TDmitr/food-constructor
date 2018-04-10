@@ -44,11 +44,15 @@ import { SiteCategoryComponent } from './site/routes/site-category/site-category
 import { SiteCategoryItemComponent } from './site/components/site-category-item/site-category-item.component';
 import { SiteCategoryItemInfoComponent } from './site/routes/site-category-item-info/site-category-item-info.component';
 import {CartService} from "./site/services/cart.service";
+import {FavouritesService} from "./site/services/favourites.service";
+import { DishIngredientsComponent } from './site/components/dish-ingredients/dish-ingredients.component';
+import { ServiceListComponent } from './site/components/service-list/service-list.component';
+import {HeaderSiteComponent} from "./site/components/header/header.component";
 
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: '', component: SiteMainRouter},
+  {path: '', component: SiteMainRouter, children: [{path: 'view', component: SiteCategoryItemInfoComponent}]},
   {
     path: 'admin',
     component: MainComponent,
@@ -119,7 +123,10 @@ const appRoutes: Routes = [
     SiteMainRouter,
     SiteCategoryComponent,
     SiteCategoryItemComponent,
-    SiteCategoryItemInfoComponent
+    SiteCategoryItemInfoComponent,
+    DishIngredientsComponent,
+    ServiceListComponent,
+    HeaderSiteComponent
   ],
   imports: [
     BrowserModule,
@@ -129,7 +136,7 @@ const appRoutes: Routes = [
     FormsModule,
     BrowserAnimationsModule
   ],
-  providers: [NgDataJsonserviceService, UserServiceService, CartService],
+  providers: [NgDataJsonserviceService, UserServiceService, CartService, FavouritesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

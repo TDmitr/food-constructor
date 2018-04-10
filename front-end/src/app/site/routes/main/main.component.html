@@ -1,41 +1,4 @@
-<header>
-  <div class="hd-top">
-    <div class="hd-top__logo">Your Business Logo</div>
-    <div class="hd-top__search">
-      <input placeholder="Search">
-    </div>
-    <div class="hd-top__account">
-      <a href="#">
-        <svg><use xlink:href="./assets/img/svg-sprites.svg#cart"></use></svg>
-        <span>{{(shoppingCartItems | async).length}}</span>
-      </a>
-      <a href="#">
-        <svg><use xlink:href="./assets/img/svg-sprites.svg#user"></use></svg>
-      </a>
-      <a href="#">
-        <svg><use xlink:href="./assets/img/svg-sprites.svg#like"></use></svg>
-      </a>
-    </div>
-  </div>
-  <div class="hd-bottom">
-    <div class="hd-bottom__item dropdown">Shop
-      <ul class="submenu">
-        <li><a href="#"> Category 1</a></li>
-        <li><a href="#"> Category 2</a></li>
-        <li><a href="#"> Category 3</a></li>
-        <li><a href="#"> Category 4</a></li>
-        <li><a href="#"> Category 5</a></li>
-        <li><a href="#"> Category 6</a></li>
-        <li><a href="#"> Category 7</a></li>
-      </ul>
-    </div>
-
-    <a href="#" class="hd-bottom__item">Create Dish</a>
-    <a href="#" class="hd-bottom__item">Special Propositions</a>
-    <a href="#" class="hd-bottom__item">About Us</a>
-    <a href="#" class="hd-bottom__item">Contacts</a>
-  </div>
-</header>
+<app-site-header></app-site-header>
 
 <div class="content">
   <app-site-category></app-site-category>
@@ -43,3 +6,5 @@
 <footer>
 
 </footer>
+
+<router-outlet></router-outlet>
