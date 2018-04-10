@@ -4,8 +4,9 @@
   </div>
   <form>
     <div class="add-content" *ngIf="state == 1">
-      <h3>STEP 1: Fill category details</h3>
-      <app-add-first-step></app-add-first-step>
+      <h3>STEP 1: Fill group details</h3>
+      <input name="name" placeholder="Group Name">
+      <app-file-loader></app-file-loader>
       <div class="add-content__controls">
         <a [routerLink]="['../']" class="add-content__controls__btn add-content__controls__btn--transparent">Cancel</a>
         <button class="add-content__controls__btn add-content__controls__btn--blue" (click)="nextStep()">Next</button>
@@ -13,8 +14,20 @@
     </div>
 
     <div class="add-content" *ngIf="state == 2">
-      <h3>STEP 2: Describe size properties</h3>
-      <app-add-second-step></app-add-second-step>
+      <h3>STEP 2: Add group properties</h3>
+      <button class='add-property-btn' (click)="togglePropertyForm(true)">Add property</button>
+      <div class="property-list">
+        <div class="property-list__item" *ngFor="let property of properties; let i = index">
+            <div class="name">{{property.name}}: </div>
+            <div class="values">
+              <app-label *ngFor="let value of property.values" [name]="value"></app-label>
+            </div>
+            <div class="actions">
+              <button class="edit" (click)="openEdit(property, i)">Edit</button>
+              <button class="delete" (click)="deleteProperty(i)">Delete</button>
+            </div>
+        </div>
+      </div>
       <div class="add-content__controls">
         <button class="add-content__controls__btn add-content__controls__btn--blue" (click)="prevStep()">Back</button>
         <button class="add-content__controls__btn add-content__controls__btn--green">Submit</button>
@@ -23,3 +36,10 @@
 
   </form>
 </div>
+
+<app-add-popup *ngIf="state === 2 && isAddProperty"
+   (save)="addProperty($event)"
+   (close)="togglePropertyForm(false)"
+   (edit)="edit($event)"
+   [data]="editMode"
+></app-add-popup>

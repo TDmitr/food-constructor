@@ -1,0 +1,98 @@
+@import "../../../styles/sass/variables"
+@import "../../../styles/sass/mixin"
+
+.file-loader
+  width: 100%
+  margin: 15px auto
+  padding: 35px 25px
+  border: 2px dashed lightgrey
+  border-radius: 10px
+  text-align: center
+
+  svg
+    fill: $blue
+    opacity: .5
+    width: 125px
+    height: 75px
+
+  input[type='file']
+    opacity: 0
+    position: absolute
+    cursor: pointer
+
+    & + label
+      padding: 7px 25px
+      background: #DC6180
+      color: white
+      display: inline-block
+      cursor: pointer
+      width: auto
+      font-size: 18px
+      transition: background $transition
+      &:hover
+        background: darken(#DC6180, 10%)
+
+  p:first-of-type
+    font-size: 20px
+    font-weight: 600
+    color: $dark
+  p:last-of-type
+    font-size: 16px
+    font-weight: 100
+    color: $dark
+
+.file-loaded
+  width: 100%
+  margin: 15px auto
+  padding: 25px 45px
+  border: 2px dashed lightgrey
+  border-radius: 10px
+  text-align: center
+  display: flex
+  justify-content: space-between
+  align-items: center
+
+  &__image
+    position: relative
+    width: 25%
+    img
+      max-width: 100%
+
+  &__name
+    font-size: 16px
+    padding: 0 25px
+    width: 50%
+  &__actions
+    width: 25%
+    text-align: right
+    button
+      cursor: pointer
+      border: none
+      font-size: 16px
+      height: 20px
+      width: 20px
+      transition: background .3s
+      color: white
+      position: relative
+      &:before,
+      &:after
+        content: ''
+        display: block
+        width: 100%
+        height: 1px
+        background: $dark-grey
+        position: absolute
+        left: 0
+        transition: background .3s
+      &:before
+        transform: rotate(45deg)
+      &:after
+        transform: rotate(-45deg)
+      &:hover
+        &:before,
+        &:after
+          background: $dark
+
+
+
+

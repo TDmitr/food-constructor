@@ -39,6 +39,9 @@ import { IngredientsGroupComponent} from './admin/routes/dashboard/ingredients/g
 import { IngredientsAddGroupComponent } from './admin/routes/dashboard/ingredients/group/add/add.component';
 import { IngredientsIndexGroupComponent} from './admin/routes/dashboard/ingredients/group/index/index.component';
 import { GridComponent } from './admin/components/grid/grid.component';
+import { AddPopupComponent } from './admin/components/add-popup/add-popup.component';
+import { LabelComponent } from './admin/elements/label/label.component';
+import { FileLoaderComponent } from './admin/elements/file-loader/file-loader.component';
 
 
 const appRoutes: Routes = [
@@ -109,7 +112,10 @@ const appRoutes: Routes = [
     IngredientsGroupComponent,
     IngredientsAddGroupComponent,
     IngredientsIndexGroupComponent,
-    GridComponent
+    GridComponent,
+    AddPopupComponent,
+    LabelComponent,
+    FileLoaderComponent
   ],
   imports: [
     BrowserModule,

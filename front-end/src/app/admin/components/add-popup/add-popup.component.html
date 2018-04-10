@@ -1,0 +1,28 @@
+<div class="add-popup">
+  <div class="add-popup__content">
+    <h2 class="add-popup__header">ADD PROPERTY</h2>
+
+    <form class="add-popup__form" #addForm="ngForm">
+      <input type="text" [(ngModel)]=name placeholder="Property Name" name="name" ngModel required>
+
+      <label>Values</label>
+      <div class="element">
+        <input type="text" [(ngModel)]=value placeholder="Value" name="value" ngModel required>
+      </div>
+
+        <div class="element" id="row-element-1"  *ngFor="let field of fieldArray; let i = index">
+          <input type="text" placeholder="Value" [(ngModel)]="field.value" name={{field.value}} [ngModelOptions]="{standalone: true}" class="short">
+          <button class="element-delete" (click)="removeRow(i)">
+            <svg>
+              <use xlink:href="./assets/img/svg-sprites.svg#delete"></use>
+            </svg>
+          </button>
+        </div>
+
+      <button class="add-another" (click)="addRow()">Add Another Value</button>
+
+      <button class="cancel" (click)="closePopup()">Cancel</button>
+      <button class="save" (click)="saveData(addForm.value)">Save</button>
+    </form>
+  </div>
+</div>

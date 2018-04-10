@@ -1,0 +1,114 @@
+@import "../../../styles/sass/variables"
+@import "../../../styles/sass/mixin"
+
+.add-popup
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background: rgba(255,255,255,.7)
+  z-index: 1000
+
+  &__content
+    position: absolute
+    width: 50%
+    padding: 55px 40px
+    background: white
+    box-shadow: 0 8px 18px rgba(0,0,0,0.1), 0 4px 4px rgba(0,0,0,0.01)
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+
+  &__header
+    font-size: 23px
+    color: #019CDF
+    text-transform: uppercase
+    text-align: center
+
+  &__form
+    width: 100%
+    position: relative
+
+    label
+      display: block
+      font-size: 20px
+      color: #019CDF
+      text-transform: uppercase
+      font-weight: 700
+      padding-top: 20px
+
+    input
+      border: 1px solid darken($light-blue, 5%)
+      font-size: 16px
+      padding: 10px 25px
+      transition: border-color $transition
+      width: 100%
+      &:focus
+        border-color: $blue
+
+    .element
+      padding: 7px 0
+
+      input.short
+        width: 90%
+
+      button
+        background: transparent
+        border: none
+        cursor: pointer
+        vertical-align: -7px
+        height: 100%
+        svg
+          fill: #C81D25
+          height: 28px
+          width: 30px
+          transition: fill $transition
+        &:hover svg
+          fill: darken(#C81D25, 10%)
+        &:disabled svg
+          fill: rgba(0,0,0,.4)
+
+    button
+      cursor: pointer
+
+      &.save,
+      &.cancel
+        padding: 5px 25px
+        width: 160px
+        font-size: 22px
+        border: none
+        transition: background $transition
+        text-decoration: none
+        text-align: center
+
+
+      &.save
+        background: #4CAF50
+
+        color: white
+        &:hover
+          background: darken(#4CAF50, 10%)
+      &.cancel
+        border: 1px solid rgba(0,0,0,.4)
+        margin-right: calc(100% - 325px)
+        color: $dark
+        &:hover
+          background: $light-blue
+
+
+      &.add-another
+        width: 100%
+        margin-top: 50px
+        margin-bottom: 50px
+        height: 42px
+        font-size: 15px
+        color: rgba(0,0,0,.4)
+        background: $light-blue
+        border: 1px solid rgba(0,0,0,.1)
+        transition: background $transition, color $transition
+        font-weight: 600
+        text-transform: uppercase
+        &:hover
+          background: darken($light-blue, 5%)
+          color: $dark
