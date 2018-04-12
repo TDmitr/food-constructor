@@ -8,15 +8,20 @@ import main.Entities.Authority;
 import main.Entities.User;
 import main.Repositories.AuthorityRepository;
 import main.Repositories.UserRepository;
+import main.service.SecurityContextService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by igor on 3/2/18.
@@ -28,6 +33,8 @@ public class UserController {
     private UserRepository userRepository;
     @Autowired
     private AuthorityRepository authorityRepository;
+    @Autowired
+    private SecurityContextService securityContextService;
 
     @GetMapping("/users")
     public Iterable<User> allUsers(){
@@ -60,13 +67,11 @@ public class UserController {
             return new ResponseEntity<>(new CustomErrorType("Unable to create. No such authority " +
                     tempUser.getAuthority()), HttpStatus.CONFLICT);
         }
-        String passHex = Hashing.sha256()
-                .hashString(tempUser.password, StandardCharsets.UTF_8)
-                .toString();
+
         User newUser = User.builder()
                 .authority(tempAuth)
                 .username(tempUser.username)
-                .password(passHex)
+                .password(createSHA256Hash(tempUser.password))
                 .enabled(true)
                 .build();
         userRepository.save(newUser);
@@ -77,20 +82,20 @@ public class UserController {
 
     // ------------------- Update a User ------------------------------------------------
 
-//    @RequestMapping(value = "/user/{email}", method = RequestMethod.PUT)
-//    public ResponseEntity<?> updateUser(@PathVariable("email") String email, @RequestBody User user) {
-//        User currentUser = userRepository.findByEmail(email);
-//
-//        if (currentUser == null) {
-//            return new ResponseEntity<>(new CustomErrorType("Unable to upate. User with email " + email + " not found."),
-//                    HttpStatus.NOT_FOUND);
-//        }
-//
-//        currentUser.setName(user.getName());
-//
-//        userRepository.(currentUser);
-//        return new ResponseEntity<User>(currentUser, HttpStatus.OK);
-//    }
+    @RequestMapping(value = "/user/{username}", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateUser(@PathVariable("username") String username, @RequestBody User user) {
+        User currentUser = userRepository.findUserByUsername(username);
+
+        if (currentUser == null) {
+            return new ResponseEntity<>(new CustomErrorType("Unable to upate. User with email " + username + " not found."),
+                    HttpStatus.NOT_FOUND);
+        }
+        currentUser.setName(user.getName());
+        currentUser.setPassword(createSHA256Hash(user.getPassword()));
+
+        userRepository.save(currentUser);
+        return new ResponseEntity<User>(currentUser, HttpStatus.OK);
+    }
 
     // ------------------- Delete a User-----------------------------------------
 
@@ -115,10 +120,32 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
+    @GetMapping("/currentUser")
+    public ResponseEntity getLoggedInUser(){
+        if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() == "anonymousUser"){
+            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+        }
+
+        Optional currentUser = securityContextService.currentUser();
+        return new ResponseEntity<>(currentUser.get(), HttpStatus.OK);
+    }
+
+    @GetMapping("/usersByRole/{role}")
+    public ResponseEntity findUsersByRole(@PathVariable("role") String role){
+        Authority serchedAuth = authorityRepository.findAuthorityByAuthority("ROLE_" + role);
+        return new ResponseEntity(serchedAuth.getUsers(), HttpStatus.OK);
+    }
+
     @Data
     private static final class TempUser{
         private String username;
         private String password;
         private String authority;
+    }
+
+    private String createSHA256Hash(String variable){
+        return Hashing.sha256()
+                .hashString(variable, StandardCharsets.UTF_8)
+                .toString();
     }
 }
