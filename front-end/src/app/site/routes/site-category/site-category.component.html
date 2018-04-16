@@ -4,7 +4,14 @@
 
   </div>
   <div class="category__body">
-    <app-site-category-item class="category__body__item" *ngFor="let item of data" [dish]="item"></app-site-category-item>
+    <div class="category__body__item">
+      <svg>
+        <use xlink:href="./assets/img/food-sprites.svg#colorSalad"></use>
+      </svg>
+      <header>Create your own salad.</header>
+      <a [routerLink]="['../constructor']">Get Started</a>
+    </div>
+    <app-site-category-item *ngFor="let item of data" [dish]="item"></app-site-category-item>
   </div>
 
 </div>

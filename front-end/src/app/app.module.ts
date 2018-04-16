@@ -49,11 +49,16 @@ import { DishIngredientsComponent } from './site/components/dish-ingredients/dis
 import { ServiceListComponent } from './site/components/service-list/service-list.component';
 import {HeaderSiteComponent} from "./site/components/header/header.component";
 import { ChangeIngredientComponent } from './site/components/change-ingredient/change-ingredient.component';
+import { DishConstructorComponent } from './site/routes/dish-constructor/dish-constructor.component';
 
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: '', component: SiteMainRouter, children: [{path: 'view/:dishId', component: SiteCategoryItemInfoComponent}]},
+  {path: '', component: SiteMainRouter,
+    children: [
+      {path: 'category', component: SiteCategoryComponent, children: [{path: 'view/:dishId', component: SiteCategoryItemInfoComponent}]},
+      {path: 'constructor', component: DishConstructorComponent}
+      ]},
   {
     path: 'admin',
     component: MainComponent,
@@ -128,7 +133,8 @@ const appRoutes: Routes = [
     DishIngredientsComponent,
     ServiceListComponent,
     HeaderSiteComponent,
-    ChangeIngredientComponent
+    ChangeIngredientComponent,
+    DishConstructorComponent
   ],
   imports: [
     BrowserModule,
