@@ -48,11 +48,12 @@ import {FavouritesService} from "./site/services/favourites.service";
 import { DishIngredientsComponent } from './site/components/dish-ingredients/dish-ingredients.component';
 import { ServiceListComponent } from './site/components/service-list/service-list.component';
 import {HeaderSiteComponent} from "./site/components/header/header.component";
+import { ChangeIngredientComponent } from './site/components/change-ingredient/change-ingredient.component';
 
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: '', component: SiteMainRouter, children: [{path: 'view', component: SiteCategoryItemInfoComponent}]},
+  {path: '', component: SiteMainRouter, children: [{path: 'view/:dishId', component: SiteCategoryItemInfoComponent}]},
   {
     path: 'admin',
     component: MainComponent,
@@ -126,7 +127,8 @@ const appRoutes: Routes = [
     SiteCategoryItemInfoComponent,
     DishIngredientsComponent,
     ServiceListComponent,
-    HeaderSiteComponent
+    HeaderSiteComponent,
+    ChangeIngredientComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 <div class="item">
   <div class="item__img">
-    <a [routerLink]="['view']">Quick view</a>
+    <a [routerLink]="['view/' + dish.id] ">Quick view</a>
   </div>
   <header class="item__header">{{dish.name}}</header>
   <div class="item__weight">{{dish.weight}}</div>

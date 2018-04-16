@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-dish-ingredients',
@@ -6,23 +6,50 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dish-ingredients.component.sass']
 })
 export class DishIngredientsComponent implements OnInit {
-  fieldArray: Array<any> = [{id: 1, name: 'Chicken'}, {id: 2, name: 'Chicken'}, {id: 3, name: 'Chicken'}];
-  newAttribute: any = {name: 'Chicken', isEdit: true};
-  isEdit = true;
+  @Input() ingredients: any;
+  @Input() addIngredients: any;
+  fieldArray: Array<any> = [];
+  isEdit = false;
+  public currList: any;
+  public currChange: any;
 
   constructor() { }
-  addRow() {
-    this.fieldArray.push(this.newAttribute);
-    this.newAttribute = {name: 'Chicken', isEdit: !this.isEdit};
-    this.isEdit = !this.isEdit;
+  addRowPopup(data) {
+    if (data) {
+      this.currList = data.change;
+      this.currChange = data.id;
+    } else {
+      this.currList = this.addIngredients.slice(0);
+      this.currChange = false;
+    }
+    this.isEdit = true;
+  }
+  closePopup() {
+    this.isEdit = false;
+  }
+  addRow(data) {
+    this.fieldArray.push(data);
+    this.closePopup();
   }
   removeRow(index) {
     if (this.fieldArray.length > 1) {
       this.fieldArray.splice(index, 1);
     }
   }
+  changeElem(data) {
+    this.fieldArray.forEach(elem => {
+      if (elem.id === this.currChange) {
+        elem.id = data.id;
+        elem.name = data.name;
+        elem.price = data.price;
+        return;
+      }
+    });
+    this.closePopup();
+  }
 
   ngOnInit() {
+    this.fieldArray = this.ingredients.slice(0);
   }
 
 }

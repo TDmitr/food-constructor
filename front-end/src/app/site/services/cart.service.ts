@@ -20,8 +20,8 @@ export class CartService {
     return this.itemsInCartSubject;
   }
   public getTotalPrice(): Observable<number> {
-    return this.itemsInCartSubject.map((items: Object[]) => {
-      return items.reduce((prev, curr: Object) => {
+    return this.itemsInCartSubject.map((items: any) => {
+      return items.reduce((prev, curr) => {
         return prev + (curr['price'] * curr['count']);
       }, 0);
     });
