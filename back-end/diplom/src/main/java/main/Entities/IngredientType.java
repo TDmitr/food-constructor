@@ -1,6 +1,9 @@
 package main.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +16,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "ingredient_type")
-//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class IngredientType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

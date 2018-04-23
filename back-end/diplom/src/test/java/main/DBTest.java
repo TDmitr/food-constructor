@@ -80,7 +80,7 @@ public class DBTest {
 
     @Test
     public void testIngredient(){
-        Ingredient chickenMeat = new Ingredient("Chicken meat", "0.3", new BigDecimal(10),
+        Ingredient chickenMeat = new Ingredient("Chicken meat", "0.3", 10,
                 meat, new byte[]{}, new HashSet<>(), new HashSet<>(),new HashSet<>());
         meat.addIngredient(chickenMeat);
         ingredientRepository.save(chickenMeat);

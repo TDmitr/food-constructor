@@ -1,6 +1,9 @@
 package main.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -9,6 +12,8 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "order_table")
+@EqualsAndHashCode(exclude = "user")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

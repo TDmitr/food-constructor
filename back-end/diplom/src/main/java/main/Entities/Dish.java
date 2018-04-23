@@ -1,6 +1,9 @@
 package main.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -9,6 +12,8 @@ import java.util.*;
 @Data
 @Entity
 @Table(name = "dish")
+@EqualsAndHashCode(exclude = {"dishType","ingredients"})
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Dish {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,7 +38,8 @@ public class Dish {
 
     public Dish(String name, DishType dishType, List<Ingredient> ingredients,Set<OrderDish> orderDishes) {
         this.name = name;
-        this.dishType = dishType;
+//        this.dishType = dishType;
+        setDishType(dishType);
         this.ingredients = ingredients;
         ingredients.addAll(dishType.getNecessaryIngredients());
         this.orderDishes = orderDishes;
@@ -45,18 +51,21 @@ public class Dish {
 
     public Dish(){}
 
-    protected BigDecimal getPrice()
+    protected double getPrice()
     {
-        BigDecimal result = BigDecimal.valueOf(0);
+        double result = 0;
         List<Ingredient> priceIngredients = new ArrayList<>(ingredients);
         priceIngredients.removeAll(dishType.getNecessaryIngredients());
         for (Ingredient ingredient: priceIngredients) {
-            result = result.add(ingredient.getPrice());
+            result += ingredient.getPrice();
         }
-        return result.add(dishType.getBasePrice());
+        return result + dishType.getBasePrice();
     }
 
-
+    public void setDishType(DishType dishType){
+        this.dishType = dishType;
+        dishType.getDishes().add(this);
+    }
 
 
 }

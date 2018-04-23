@@ -1,5 +1,6 @@
 package main.Entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,6 +21,7 @@ public class User implements UserDetails {
     @Getter
     private String name;
     private String username;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private Boolean enabled;
 

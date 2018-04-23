@@ -1,5 +1,8 @@
 package main.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,6 +15,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "dish_type")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class DishType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,10 +23,11 @@ public class DishType {
 
     private String name;
 
-    private BigDecimal basePrice;
+    private double basePrice;
 
     private double baseWeight;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "dishType")
     private Set<Dish> dishes;
 
@@ -42,7 +47,7 @@ public class DishType {
     )
     private Set<IngredientType> ingredientTypes;
 
-    public DishType(String name, BigDecimal basePrice, double baseWeight, Set<Dish> dishes, Set<IngredientType> ingredientTypes, List<Ingredient> necessaryIngredients) {
+    public DishType(String name, double basePrice, double baseWeight, Set<Dish> dishes, Set<IngredientType> ingredientTypes, List<Ingredient> necessaryIngredients) {
         this.name = name;
         this.basePrice = basePrice;
         this.baseWeight = baseWeight;
@@ -51,10 +56,16 @@ public class DishType {
         this.necessaryIngredients = necessaryIngredients;
     }
 
-    public DishType(String name, BigDecimal basePrice, double baseWeight) {
+    public DishType(String name, double basePrice, double baseWeight) {
         this(name,basePrice,baseWeight,new HashSet<>(),new HashSet<>(),new ArrayList<>());
     }
 
     public DishType() {
+    }
+
+
+    public void addDish(Dish dish){
+        this.dishes.add(dish);
+
     }
 }
