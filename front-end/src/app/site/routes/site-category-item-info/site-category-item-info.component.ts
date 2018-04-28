@@ -18,7 +18,7 @@ export class SiteCategoryItemInfoComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
-      this.dish = this.data.find(elem => elem.id == params.dishId);
+      this.dish = this.data.find(elem => elem.id === params.dishId);
     });
   }
 
