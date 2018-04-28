@@ -15,9 +15,9 @@ export class FormComponent implements OnInit {
 
   save(form: NgForm) {
     console.log(form);
-    // this.userService.add(form).subscribe(result => {
-    //   console.log('add user', result)
-    // });
+    this.userService.add(form).subscribe(result => {
+      console.log('add user', result)
+    });
   }
 
   ngOnInit() {

@@ -39,15 +39,32 @@ import { IngredientsGroupComponent} from './admin/routes/dashboard/ingredients/g
 import { IngredientsAddGroupComponent } from './admin/routes/dashboard/ingredients/group/add/add.component';
 import { IngredientsIndexGroupComponent} from './admin/routes/dashboard/ingredients/group/index/index.component';
 import { GridComponent } from './admin/components/grid/grid.component';
+
 import { AddPopupComponent } from './admin/components/add-popup/add-popup.component';
 import { LabelComponent } from './admin/elements/label/label.component';
 import { FileLoaderComponent } from './admin/elements/file-loader/file-loader.component';
+import {SiteMainRouter} from './site/routes/main/main.component';
+import { SiteCategoryComponent } from './site/routes/site-category/site-category.component';
+import { SiteCategoryItemComponent } from './site/components/site-category-item/site-category-item.component';
+import { SiteCategoryItemInfoComponent } from './site/routes/site-category-item-info/site-category-item-info.component';
+import {CartService} from "./site/services/cart.service";
+import {FavouritesService} from "./site/services/favourites.service";
+import { DishIngredientsComponent } from './site/components/dish-ingredients/dish-ingredients.component';
+import { ServiceListComponent } from './site/components/service-list/service-list.component';
+import { HeaderSiteComponent } from "./site/components/header/header.component";
+import { ChangeIngredientComponent } from './site/components/change-ingredient/change-ingredient.component';
+import { DishConstructorComponent } from './site/routes/dish-constructor/dish-constructor.component';
 
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
+  {path: '', component: SiteMainRouter,
+    children: [
+      {path: 'category', component: SiteCategoryComponent, children: [{path: 'view/:dishId', component: SiteCategoryItemInfoComponent}]},
+      {path: 'constructor', component: DishConstructorComponent}
+      ]},
   {
-    path: '',
+    path: 'admin',
     component: MainComponent,
     children: [
       {path: 'index', component: IndexComponent},
@@ -83,7 +100,6 @@ const appRoutes: Routes = [
   }
 ];
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -116,6 +132,15 @@ const appRoutes: Routes = [
     AddPopupComponent,
     LabelComponent,
     FileLoaderComponent
+    SiteMainRouter,
+    SiteCategoryComponent,
+    SiteCategoryItemComponent,
+    SiteCategoryItemInfoComponent,
+    DishIngredientsComponent,
+    ServiceListComponent,
+    HeaderSiteComponent,
+    ChangeIngredientComponent,
+    DishConstructorComponent
   ],
   imports: [
     BrowserModule,
@@ -125,7 +150,7 @@ const appRoutes: Routes = [
     FormsModule,
     BrowserAnimationsModule
   ],
-  providers: [NgDataJsonserviceService, UserServiceService],
+  providers: [NgDataJsonserviceService, UserServiceService, CartService, FavouritesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

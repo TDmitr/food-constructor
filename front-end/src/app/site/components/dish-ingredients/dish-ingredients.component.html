@@ -1,0 +1,20 @@
+<div class="label" *ngFor="let item of fieldArray; let i = index">
+    <span>{{item.name}}</span>
+    <button *ngIf="!item.isEdit" class="label__close" (click)="removeRow(i)"></button>
+    <button *ngIf="item.isEdit" class="label__change" (click)="addRowPopup(item)">
+      <svg><use xlink:href="./assets/img/svg-sprites.svg#change"></use></svg>
+    </button>
+</div>
+
+<button class="label__add" (click)="addRowPopup()">
+  <svg><use xlink:href="./assets/img/svg-sprites.svg#add-icon"></use></svg>
+</button>
+
+<app-change-ingredient *ngIf="isEdit && currList"
+                       [list]="currList"
+                       [change]="currChange"
+                       (addIngredient)="addRow($event)"
+                       (closePopup)="closePopup()"
+                       (changeIngredient)="changeElem($event)">
+
+</app-change-ingredient>

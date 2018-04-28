@@ -3,10 +3,10 @@
     "name": "MAIN",
     "icon": null,
     "children": [
-      {"name": "Home", "icon": "home", "path": "/index"},
-      {"name": "Users", "icon": "user", "path": "/users"},
-      {"name": "Managers", "icon": "manager", "path": "/managers"},
-      {"name": "Orders", "icon": "cart", "path": "/orders"}
+      {"name": "Home", "icon": "home", "path": "index"},
+      {"name": "Users", "icon": "user", "path": "users"},
+      {"name": "Managers", "icon": "manager", "path": "managers"},
+      {"name": "Orders", "icon": "cart", "path": "orders"}
     ]
   },
 
@@ -14,9 +14,9 @@
     "name": "FOOD",
     "icon": null,
     "children": [
-      {"name": "Categories", "icon": "home", "path": "/categories"},
-      {"name": "Dishes", "icon": "user", "path": "/dishes"},
-      {"name": "Ingredients", "icon": "manager", "path": "/ingredients/groups"}
+      {"name": "Categories", "icon": "home", "path": "categories"},
+      {"name": "Dishes", "icon": "user", "path": "dishes"},
+      {"name": "Ingredients", "icon": "manager", "path": "ingredients/groups"}
     ]
   }
 ]

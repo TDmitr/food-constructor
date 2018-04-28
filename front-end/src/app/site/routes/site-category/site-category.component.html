@@ -1,0 +1,17 @@
+<div class="category">
+  <div class="category__header">Category 1</div>
+  <div class="category__filter">
+
+  </div>
+  <div class="category__body">
+    <div class="category__body__item">
+      <svg>
+        <use xlink:href="./assets/img/food-sprites.svg#colorSalad"></use>
+      </svg>
+      <header>Create your own salad.</header>
+      <a [routerLink]="['../constructor']">Get Started</a>
+    </div>
+    <app-site-category-item *ngFor="let item of data" [dish]="item"></app-site-category-item>
+  </div>
+
+</div>

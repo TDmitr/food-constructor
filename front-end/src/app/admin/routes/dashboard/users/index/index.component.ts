@@ -19,13 +19,13 @@ export class UsersIndexComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.userService.fetch().subscribe(res => {
-    //   console.log('all users', res);
-    //   this.outputData = res;
-    // });
-    this.getDataService.getData('users.json').subscribe(res => {
+    this.userService.fetch().subscribe(res => {
+      console.log('all users', res);
       this.outputData = res;
     });
+    // this.getDataService.getData('users.json').subscribe(res => {
+    //   this.outputData = res;
+    // });
   }
 
 }

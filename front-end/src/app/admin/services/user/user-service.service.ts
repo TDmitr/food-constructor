@@ -20,5 +20,4 @@ export class UserServiceService {
     result = this.http.post(this.USER_API, user);
     return result;
   }
-
 }
