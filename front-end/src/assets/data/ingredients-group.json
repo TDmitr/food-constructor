@@ -2,7 +2,30 @@
   {
     "name": "Diary",
     "photo": "pizza",
-    "total": 10
+    "total": 10,
+    "ingredients": [
+      {
+        "name": "Milk",
+        "price": 10.5,
+        "size": "1000ml",
+        "properties": [
+          {
+            "name": "Temperature",
+            "values": ["Hot", "Warm", "Cold"]
+          }
+        ]
+      },
+      {
+        "name": "Sour Cream 5%",
+        "price": 15.5,
+        "size": "50ml"
+      },
+      {
+        "name": "Mozzarella",
+        "price": 25,
+        "size": "100g"
+      }
+    ]
   },
   {
     "name": "Meat",

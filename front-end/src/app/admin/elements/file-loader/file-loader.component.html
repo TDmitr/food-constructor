@@ -1,0 +1,19 @@
+<div class="file-loader">
+  <svg>
+    <use xlink:href="./assets/img/svg-sprites.svg#cloud"></use>
+  </svg>
+  <p>Drag and drop files here</p>
+  <p>or</p>
+  <input type="file" id="categoryName" (change)="setImage($event)">
+  <label for="categoryName">Browse files</label>
+</div>
+
+<div class="file-loaded" *ngIf="loaded">
+  <div class="file-loaded__image">
+    <img [src]="image">
+  </div>
+  <div class="file-loaded__name">{{name}}</div>
+  <div class="file-loaded__actions">
+    <button class="remove" (click)="removeImage()"></button>
+  </div>
+</div>
