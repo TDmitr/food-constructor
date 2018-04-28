@@ -1,0 +1,9 @@
+<div class="c-list" [@articleAnimation]="data.length">
+  <article class="c-list__item" *ngFor="let item of data">
+    <svg>
+      <use [attr.xlink:href]="'./assets/img/food-sprites.svg#'+item.photo"></use>
+    </svg>
+    <h3>{{item.name}}</h3>
+    <p>{{item.total}} {{totalDescription}}</p>
+  </article>
+</div>

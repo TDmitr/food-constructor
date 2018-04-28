@@ -1,0 +1,62 @@
+<header>
+  <div class="hd-top">
+    <div class="hd-top__logo">Business Logo</div>
+    <div class="hd-top__search">
+      <input placeholder="Search">
+    </div>
+    <div class="hd-top__account">
+      <a class="mobile menu-btn" (click)="openMenuMobile()">
+        <svg><use xlink:href="./assets/img/svg-sprites.svg#menu"></use></svg>
+      </a>
+      <a>
+        <svg><use xlink:href="./assets/img/svg-sprites.svg#cart"></use></svg>
+        <span>{{(totalCartCount | async)}}</span>
+        <div class="hd-menu hd-menu--favourites">
+          <div class="hd-menu__body">
+            <app-service-list [data]="(shoppingCartItems | async)" [isCart]="true" [totalPrice]="(totalCartPrice | async)"></app-service-list>
+          </div>
+        </div>
+      </a>
+      <a>
+        <svg><use xlink:href="./assets/img/svg-sprites.svg#user-acc"></use></svg>
+        <div class="hd-menu">
+          <div class="hd-menu__body">
+            <button class="hd-menu__button hd-menu__button--yellow">Sign In</button>
+            <button class="hd-menu__button hd-menu__button--darkgrey">Sign Up</button>
+          </div>
+        </div>
+      </a>
+      <a>
+        <svg><use xlink:href="./assets/img/svg-sprites.svg#like"></use></svg>
+        <span>{{(favouriteItems | async).length}}</span>
+        <div class="hd-menu hd-menu--favourites">
+          <div class="hd-menu__body">
+            <app-service-list [data]="(favouriteItems | async)"></app-service-list>
+          </div>
+        </div>
+      </a>
+      <a class="mobile search-btn">
+        <svg><use xlink:href="./assets/img/svg-sprites.svg#search"></use></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="hd-bottom" [class.mobile-open]="mobileMenuOpen">
+    <div class="hd-bottom__item dropdown">Shop
+      <ul class="submenu">
+        <li><a href="#"> Category 1</a></li>
+        <li><a href="#"> Category 2</a></li>
+        <li><a href="#"> Category 3</a></li>
+        <li><a href="#"> Category 4</a></li>
+        <li><a href="#"> Category 5</a></li>
+        <li><a href="#"> Category 6</a></li>
+        <li><a href="#"> Category 7</a></li>
+      </ul>
+    </div>
+
+    <a href="#" class="hd-bottom__item">Create Dish</a>
+    <a href="#" class="hd-bottom__item">Special Propositions</a>
+    <a href="#" class="hd-bottom__item">About Us</a>
+    <a href="#" class="hd-bottom__item">Contacts</a>
+  </div>
+</header>

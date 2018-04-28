@@ -1,0 +1,39 @@
+<div class="view-item">
+  <div class="view-item__content">
+    <a [routerLink]="['']" class="close"></a>
+    <header>{{dish['name']}} ({{dish['weight']}})</header>
+    <div class="item-block item-block--row">
+      <div class="item-block__img"></div>
+      <div class="item-block__aside">
+        <div class="item-block__description">
+          Very good and tasty meal.
+        </div>
+        <div class="item-block__food">
+          <app-dish-ingredients [ingredients]="dish['ingredients']" [addIngredients]="dish['addIngredients']"></app-dish-ingredients>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-block item-block--lavender">
+      <div class="item-block__price">
+        <span>{{dish['currency']}}</span>
+        <span>{{dish['price']}}</span>
+      </div>
+
+      <div class="item-block__cart">
+        <button>Add to cart</button>
+      </div>
+
+      <div class="item-block__favourites">
+        <button>
+          <svg>
+            <use xlink:href="./assets/img/svg-sprites.svg#like"></use>
+          </svg>
+          Add to favourites
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</div>

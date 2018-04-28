@@ -1,0 +1,9 @@
+<div class="dashboard__add dashboard__add--large">
+  <a data-attr="Add new group" [routerLink]="['add']">
+    <svg>
+      <use xlink:href="./assets/img/svg-sprites.svg#add-icon"></use>
+    </svg>
+  </a>
+
+  <app-grid [data]='groups' [totalDescription]='totalDescription'></app-grid>
+</div>

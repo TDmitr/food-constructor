@@ -1,11 +1,18 @@
+body
+  min-width: 1240px
+  position: relative
+  padding: 0
+  margin: 0
 body *
   box-sizing: border-box
   font-family: 'Montserrat', sans-serif
-
-input, button
+a
+  text-decoration: none
+input, button, select, textarea
   outline: none
+  -webkit-appearance: none
 
-header
+header.admin-main
   font-size: 34px
   font-weight: 700
   color: $dark
@@ -17,7 +24,7 @@ header
 .dashboard
   &__add
     margin: 20px 25px
-    padding: 20px 105px
+    padding: 20px 25px
     border-top: 1px solid rgba(0,0,0,0.1)
     border-bottom: 1px solid rgba(0,0,0,0.1)
     text-align: right
@@ -69,3 +76,14 @@ header
           margin-right: 10px
 
 
+    &--large
+      a
+        width: 45px
+        height: 45px
+        svg
+          width: 25px
+          height: 25px
+          top: 10px
+          left: 10px
+        &:before
+          font-size: 18px

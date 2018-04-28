@@ -1,0 +1,46 @@
+<div class="constructor">
+  <div class="nav">
+    <div class="nav__block">
+      <div class="nav__item"
+           *ngFor="let item of data.properties"
+           [class.active]="step==item.name"
+           (click)="navToStep(item.name)">
+        {{item.name}}
+      </div>
+      <div class="nav__item"
+           *ngIf="data.isSize"
+           [class.active]="step=='size'"
+           (click)="navToStep('size')">Size</div>
+      <div class="nav__item" [class.active]="step=='submit'" (click)="navToStep('submit')">Submit</div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="content__item" *ngFor="let item of data.properties" [class.active]="step==item.name">
+      <header>{{item.name}}</header>
+       <div class="input-elem" *ngFor="let ingredient of item.ingredients">
+         <input type="{{item['mandatory'] ? 'radio' : 'checkbox'}}" [id]='item.name + "-" + ingredient.id' [name]='item.name'>
+         <label [for]='item.name + "-" + ingredient.id'>
+           {{ingredient.name}} <br>
+           <span>{{ingredient.price}} UAH</span>
+         </label>
+       </div>
+    </div>
+  </div>
+  <div class="info">
+    <header>Custom Salad Info:</header>
+    <div>
+      <div class="type">Type: </div>
+      <div class="value">Salad</div>
+    </div>
+    <div *ngFor="let item of data.properties">
+      <div class="type">{{item.name}}: </div>
+      <div class="value">Salad</div>
+    </div>
+    <div *ngIf="data.isSize">
+      <div class="type">Size:</div>
+      <div class="value">Standard</div>
+    </div>
+
+
+  </div>
+</div>

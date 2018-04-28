@@ -1,0 +1,56 @@
+@import "../../../styles/app.sass"
+
+.category
+  &__header
+    padding: 25px 0
+    text-align: center
+    text-transform: uppercase
+    color: #D32E5E
+    font:
+      size: 32px
+      weight: 700
+
+  &__body
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+    width: 100%
+    position: relative
+    align-items: flex-start
+    padding: 0 10px 25px
+    @include tablets
+      padding: 0 5% 25px
+
+    &__item
+      width: 320px
+      padding: 45px 20px 20px
+      text-align: center
+      margin: 15px 15px 0
+      transition: background .3s
+      &:hover
+        background: #f8f8ff
+        box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.3)
+        transform: scale(1.01)
+      header
+        text-transform: uppercase
+        color: #C0132C
+        font:
+          weight: 700
+          size: 23px
+      svg
+        position: relative
+        width: 200px
+        height: 200px
+        margin-bottom: 45px
+      a
+        display: block
+        background-color: #54A15C
+        padding: 7px
+        color: white
+        width: 90%
+        font-size: 18px
+        font-weight: 600
+        margin: 35px auto
+        transition: background .3s
+        &:hover
+          background: darken(#54A15C, 10%)

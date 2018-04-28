@@ -1,0 +1,13 @@
+<div class="list">
+  <div class="list__item" *ngFor="let item of data">
+    <span class="name">{{item.name}}</span>
+    <span class="price">{{item.price}} UAH</span>
+    <span class="count" *ngIf="isCart">{{item.count}}</span>
+  </div>
+  <div class="list__total list__total--items">
+    Total items: <span>{{data.length}}</span>
+  </div>
+  <div class="list__total list__total--price" *ngIf="isCart">
+    Total price: <span>{{totalPrice}} UAH</span>
+  </div>
+</div>

@@ -15,7 +15,7 @@ import { NgDataJsonserviceService } from './admin/services/ng-data-jsonservice.s
 import { KeysPipe } from './pipes/json-to-array';
 import { SearchComponent } from './admin/components/search/search.component';
 import { PaginationComponent } from './admin/components/pagination/pagination.component';
-import { CategoriesComponent } from './admin/routes/dashboard/categories/categories.component';
+
 import { EditComponent } from './admin/routes/dashboard/users/edit/edit.component';
 import { AddUserComponent } from './admin/routes/dashboard/users/add/add.component';
 import { UsersIndexComponent } from './admin/routes/dashboard/users/index/index.component';
@@ -25,12 +25,41 @@ import { UserServiceService } from './admin/services/user/user-service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ViewComponent } from './admin/routes/dashboard/users/view/view.component';
 
+import { CategoriesComponent } from './admin/routes/dashboard/categories/categories.component';
+import { CategoriesIndexComponent } from './admin/routes/dashboard/categories/index/index.component';
+import { CategoriesAddComponent } from './admin/routes/dashboard/categories/add/add.component';
 
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AddFirstStepComponent } from './admin/routes/dashboard/categories/add/add-first-step/add-first-step.component';
+import { AddSecondStepComponent } from './admin/routes/dashboard/categories/add/add-second-step/add-second-step.component';
+import { AddThirdStepComponent } from './admin/routes/dashboard/categories/add/add-third-step/add-third-step.component';
+import { AddThirdStepPopupComponent } from './admin/routes/dashboard/categories/add/add-third-step-popup/add-third-step-popup.component';
+import { IngredientsGroupComponent} from './admin/routes/dashboard/ingredients/group/group.component';
+import { IngredientsAddGroupComponent } from './admin/routes/dashboard/ingredients/group/add/add.component';
+import { IngredientsIndexGroupComponent} from './admin/routes/dashboard/ingredients/group/index/index.component';
+import { GridComponent } from './admin/components/grid/grid.component';
+import {SiteMainRouter} from './site/routes/main/main.component';
+import { SiteCategoryComponent } from './site/routes/site-category/site-category.component';
+import { SiteCategoryItemComponent } from './site/components/site-category-item/site-category-item.component';
+import { SiteCategoryItemInfoComponent } from './site/routes/site-category-item-info/site-category-item-info.component';
+import {CartService} from "./site/services/cart.service";
+import {FavouritesService} from "./site/services/favourites.service";
+import { DishIngredientsComponent } from './site/components/dish-ingredients/dish-ingredients.component';
+import { ServiceListComponent } from './site/components/service-list/service-list.component';
+import { HeaderSiteComponent } from "./site/components/header/header.component";
+import { ChangeIngredientComponent } from './site/components/change-ingredient/change-ingredient.component';
+import { DishConstructorComponent } from './site/routes/dish-constructor/dish-constructor.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
+  {path: '', component: SiteMainRouter,
+    children: [
+      {path: 'category', component: SiteCategoryComponent, children: [{path: 'view/:dishId', component: SiteCategoryItemInfoComponent}]},
+      {path: 'constructor', component: DishConstructorComponent}
+      ]},
   {
-    path: '',
+    path: 'admin',
     component: MainComponent,
     children: [
       {path: 'index', component: IndexComponent},
@@ -46,11 +75,25 @@ const appRoutes: Routes = [
           {path: 'add', component: AddUserComponent}
         ]
       },
-      {path: 'categories', component: CategoriesComponent},
+      {
+        path: 'categories',
+        component: CategoriesComponent,
+        children: [
+          { path: '', component: CategoriesIndexComponent},
+          { path: 'add', component: CategoriesAddComponent}
+        ]
+      },
+      {
+        path: 'ingredients/groups',
+        component: IngredientsGroupComponent,
+        children: [
+          {path: '', component: IngredientsIndexGroupComponent},
+          {path: 'add', component: IngredientsAddGroupComponent}
+        ]
+      }
     ]
   }
 ];
-
 
 @NgModule({
   declarations: [
@@ -66,20 +109,40 @@ const appRoutes: Routes = [
     SearchComponent,
     PaginationComponent,
     CategoriesComponent,
+    CategoriesIndexComponent,
+    CategoriesAddComponent,
     EditComponent,
     AddUserComponent,
     UsersIndexComponent,
     FormComponent,
-    ViewComponent
+    ViewComponent,
+    AddFirstStepComponent,
+    AddSecondStepComponent,
+    AddThirdStepComponent,
+    AddThirdStepPopupComponent,
+    IngredientsGroupComponent,
+    IngredientsAddGroupComponent,
+    IngredientsIndexGroupComponent,
+    GridComponent,
+    SiteMainRouter,
+    SiteCategoryComponent,
+    SiteCategoryItemComponent,
+    SiteCategoryItemInfoComponent,
+    DishIngredientsComponent,
+    ServiceListComponent,
+    HeaderSiteComponent,
+    ChangeIngredientComponent,
+    DishConstructorComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
-  providers: [NgDataJsonserviceService, UserServiceService],
+  providers: [NgDataJsonserviceService, UserServiceService, CartService, FavouritesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,23 @@
+<div class="item">
+  <div class="item__img">
+    <a [routerLink]="['view/' + dish.id] ">Quick view</a>
+  </div>
+  <header class="item__header">{{dish.name}}</header>
+  <div class="item__weight">{{dish.weight}}</div>
+  <div class="item__price">
+    <span class="curr">{{dish.currency}}</span>
+    <span class="num">{{dish.price}}</span>
+  </div>
+  <div class="item__add">
+    <button class="item__add-fav" [class.active]="isFavourite()" (click)="addToFavourites()">
+      <svg>
+        <use xlink:href="./assets/img/svg-sprites.svg#like"></use>
+      </svg>
+    </button>
+    <button class="item__add-cart" (click)="addToCart()">
+      <svg>
+        <use xlink:href="./assets/img/svg-sprites.svg#basket"></use>
+      </svg>
+    </button>
+  </div>
+</div>

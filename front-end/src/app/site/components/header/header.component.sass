@@ -1,0 +1,240 @@
+@import "../../../styles/app.sass"
+
+header
+  display: block
+  position: fixed
+  width: 100%
+  left: 0
+  top: 0
+  z-index: 5
+  .hd-menu
+    display: none
+    opacity: 0
+    position: absolute
+    width: 200px
+    bottom: -125px
+    z-index: 80
+    padding-top: 20px
+    left: -120%
+    &--favourites
+      top: 30px
+    &:before
+      content: ''
+      display: block
+      position: absolute
+      top: 10px
+      left: 27%
+      width: 0
+      height: 0
+      border-left: 10px solid transparent
+      border-right: 10px solid transparent
+      border-bottom: 10px solid white
+      z-index: 81
+    &__body
+      position: relative
+      padding: 15px 0 5px
+      width: 100%
+      background: white
+      border-radius: 10px
+      box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.5)
+    &:hover
+      display: block
+      opacity: 1
+
+    &__button
+      font-size: 16px
+      font-weight: 600
+      height: 35px
+      line-height: 35px
+      border: none
+      padding: 0 15px
+      width: 80%
+      margin: 0 10% 10px
+      cursor: pointer
+      border-radius: 5px
+      transition: background .3s
+
+      &--yellow
+        background: #FFD641
+        color: #333745
+        &:hover
+          background: darken(#FFD641, 15%)
+
+      &--darkgrey
+        background: #333745
+        color: white
+        &:hover
+          background: darken(#333745, 15%)
+
+
+  .hd-top
+    flex-wrap: wrap
+    width: 100%
+    padding: 20px 10%
+    display: flex
+    justify-content: space-between
+    align-items: center
+    background: #141e30 /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #141e30, #243b55) /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #141e30, #243b55) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    &__logo
+      text-align: center
+      width: 100%
+      font-size: 30px
+      color: white
+      font-weight: 700
+      text-transform: uppercase
+      @include tablets
+        text-align: left
+        width: 30%
+    &__search
+      display: none
+      @include tablets
+        display: block
+        width: 50%
+        padding: 0 20px
+        input
+          width: 100%
+          padding: 0 25px
+          height: 30px
+          font-size: 17px
+          border: none
+          color: white
+          background: rgba(255,255,255, .1)
+          &::placeholder
+            color: white
+            opacity: .8
+
+    &__account
+      display: flex
+      width: 100%
+      justify-content: center
+      padding: 25px 10px 0
+      @include tablets
+        text-align: left
+        justify-content: flex-start
+        padding: 0
+        width: auto
+      a
+        display: block
+        position: relative
+        width: 40px
+        height: 40px
+        border: 1px solid white
+        border-radius: 50%
+        margin: 0 0 0 10px
+        transition: background .3s
+        &.mobile
+          @include tablets
+            display: none
+        &:hover
+          background: rgba(255,255,255,.1)
+        span
+          display: block
+          position: absolute
+          font-size: 13px
+          width: 25px
+          height: 25px
+          padding: 3px 0
+          background: white
+          border-radius: 50%
+          font-weight: 500
+          text-align: center
+          top: -10px
+          right: -10px
+          border: 1px solid #141e30
+        &:hover
+          .hd-menu
+            display: block
+            opacity: 1
+      svg
+        fill: white
+        height: 18px
+        width: 18px
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-51%, -50%)
+
+  .hd-bottom
+    display: none
+    width: 100%
+    padding: 0 5%
+    border-bottom: 1px solid lavender
+    position: relative
+    height: 50px
+    background: white
+    @include tablets
+      display: flex
+
+    &__item
+      color: #141e30
+      height: 100%
+      text-transform: uppercase
+      font-weight: 400
+      line-height: 50px
+      font-size: 18px
+      padding: 0 25px
+      cursor: pointer
+      border-right: 1px solid lavender
+      background: white
+      transition: background .3s ease-in-out
+      z-index: 100
+      white-space: nowrap
+      &:hover
+        background: lavender
+      &:first-child
+        border-left: 1px solid lavender
+
+      ul.submenu
+        opacity: 0
+        max-height: 0
+        border: none
+        width: 100%
+        overflow: hidden
+        position: absolute
+        margin: 0
+        top: 100%
+        left: 0
+        column-count: 3
+        column-rule: 1px solid lavender
+        background: #f8f8ff
+        transition: opacity .3s
+        padding: 0
+
+        li
+          list-style: none
+          line-height: 2
+          padding: 0 15px
+          column-fill: auto
+          text-transform: none
+          a
+            color: lighten(#141e30, 10%)
+            border-bottom: 1px solid transparent
+            transition: border-bottom .3s
+          a:hover
+            border-bottom-color: lighten(#141e30, 10%)
+
+      &.dropdown:after
+        content: ''
+        display: block
+        position: absolute
+        width: 0
+        height: 0
+        border-left: 10px solid transparent
+        border-right: 10px solid transparent
+        border-top: 10px solid lavender
+        opacity: 0
+        transition: opacity .3s
+
+      &:hover ul.submenu
+        opacity: 1
+        padding: 15px 5%
+        border-top: 1px solid lavender
+        border-bottom: 1px solid lavender
+        max-height: 9999px
+      &.dropdown:hover
+        cursor: auto
+        &:after
+          opacity: 1
